@@ -3,25 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --rouge: #E8001C;
+  --cyan: #5ECFCF;
+  --dark: #1A1A2E;
+  --gris: #F5F5F5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply text-gray-800 bg-white; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[#E8001C] text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .btn-secondary {
+    @apply border-2 border-[#E8001C] text-[#E8001C] px-6 py-3 rounded-lg font-semibold hover:bg-[#E8001C] hover:text-white transition-colors duration-200;
+  }
+  .btn-outline-white {
+    @apply border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#E8001C] transition-colors duration-200;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4;
+  }
+  .section-subtitle {
+    @apply text-gray-500 text-lg mb-10 max-w-2xl mx-auto;
+  }
+  .badge {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-semibold;
   }
 }
