@@ -3,7 +3,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
-import { MapPin, Phone, Mail, Clock, CheckCircle } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, CheckCircle, Loader2 } from 'lucide-react'
+import Link from 'next/link'
 
 const schema = z.object({
   nom: z.string().min(2, 'Nom requis'),
@@ -38,10 +39,14 @@ export default function ContactPage() {
         <div>
           <h2 className="text-2xl font-bold text-[#1A1A2E] mb-6">Envoyez-nous un message</h2>
           {success ? (
-            <div className="text-center py-12">
-              <CheckCircle size={56} className="text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-[#1A1A2E] mb-2">Message envoyé !</h3>
-              <p className="text-gray-500">Nous vous répondrons dans les plus brefs délais.</p>
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                <CheckCircle size={40} className="text-green-500" />
+              </div>
+              <h3 className="text-2xl font-bold text-[#1A1A2E] mb-3">Message envoyé !</h3>
+              <p className="text-gray-500 mb-2">Merci de nous avoir contactés.</p>
+              <p className="text-gray-400 text-sm mb-8">Notre équipe vous répondra dans les plus brefs délais.</p>
+              <Link href="/" className="btn-primary">Retour à l&apos;accueil</Link>
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -65,7 +70,8 @@ export default function ContactPage() {
                 <textarea {...register('message')} rows={5} className="w-full border rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#E8001C] resize-none" />
                 {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
               </div>
-              <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-60">
+              <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-60 inline-flex items-center justify-center gap-2">
+                {loading && <Loader2 size={16} className="animate-spin" />}
                 {loading ? 'Envoi...' : 'Envoyer le message'}
               </button>
             </form>
@@ -77,9 +83,9 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-[#1A1A2E] mb-6">Nos coordonnées</h2>
             <div className="space-y-4">
               {[
-                { icon: MapPin, label: 'Adresse', value: '123 Rue de la Formation, 75000 Paris' },
-                { icon: Phone, label: 'Téléphone', value: '+33 1 23 45 67 89' },
-                { icon: Mail, label: 'Email', value: 'contact@visum-akademie.com' },
+                { icon: MapPin, label: 'Adresse', value: 'Tchougo, Bangangté, Ouest Cameroun' },
+                { icon: Phone, label: 'Téléphone', value: '+237 653 78 04 08' },
+                { icon: Mail, label: 'Email', value: 'contact@visumakademie.com' },
                 { icon: Clock, label: 'Horaires', value: 'Lun–Ven : 8h–18h | Sam : 9h–13h' },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-start gap-4">
@@ -97,7 +103,7 @@ export default function ContactPage() {
 
           <div className="rounded-xl overflow-hidden h-64 bg-gray-200">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.292292615674!3d48.858370079287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUxJzMwLjEiTiAywr8xNyczMi4yIkU!5e0!3m2!1sfr!2sfr!4v1620000000000"
+              // src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.292292615674!3d48.858370079287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUxJzMwLjEiTiAywr8xNyczMi4yIkU!5e0!3m2!1sfr!2sfr!4v1620000000000"
               width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
             />
           </div>

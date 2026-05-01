@@ -53,9 +53,9 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-4">Contact</h4>
           <ul className="space-y-3 text-sm">
-            <li className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 text-[#5ECFCF] shrink-0" /><span>123 Rue de la Formation, Ville</span></li>
-            <li className="flex items-center gap-2"><Phone size={16} className="text-[#5ECFCF]" /><span>+33 1 23 45 67 89</span></li>
-            <li className="flex items-center gap-2"><Mail size={16} className="text-[#5ECFCF]" /><span>contact@visum-akademie.com</span></li>
+            <li className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 text-[#5ECFCF] shrink-0" /><span>Tchougo, Bangangté, Ouest Cameroun</span></li>
+            <li className="flex items-center gap-2"><Phone size={16} className="text-[#5ECFCF]" /><span>+237 653 78 04 08</span></li>
+            <li className="flex items-center gap-2"><Mail size={16} className="text-[#5ECFCF]" /><span>contact@visumakademie.com</span></li>
           </ul>
         </div>
 

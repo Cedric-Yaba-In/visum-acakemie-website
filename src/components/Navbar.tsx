@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 
 const links = [
@@ -19,8 +18,10 @@ export default function Navbar() {
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/">
-            <Image src="/logo-nobg.png" alt="Visum Akademie" width={140} height={50} className="object-contain" />
+          <Link href="/" className="flex items-baseline gap-0.5 select-none">
+            <span className="text-2xl font-black tracking-tight text-[#E8001C]">Visum</span>
+            <span className="text-2xl font-black tracking-tight text-[#1A1A2E]"> Akademie</span>
+            <span className="ml-1.5 text-xs font-semibold text-[#5ECFCF] uppercase tracking-widest hidden sm:inline">🇩🇪 Deutsch</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

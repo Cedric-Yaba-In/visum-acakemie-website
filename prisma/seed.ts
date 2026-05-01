@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 async function main() {
   // Admin par défaut
-  const hashedPassword = await bcrypt.hash('Admin@2024!', 12)
+  const hashedPassword = await bcrypt.hash('Admin@2026!', 12)
   await prisma.admin.upsert({
     where: { email: 'admin@visum-akademie.com' },
     update: {},

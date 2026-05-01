@@ -4,7 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle, Loader2 } from 'lucide-react'
+import Link from 'next/link'
 
 const schema = z.object({
   nom: z.string().min(2, 'Nom requis'),
@@ -37,11 +38,18 @@ export default function InscriptionPage() {
   }
 
   if (success) return (
-    <div className="min-h-[60vh] flex items-center justify-center px-4">
+    <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="text-center max-w-md">
-        <CheckCircle size={64} className="text-green-500 mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-[#1A1A2E] mb-2">Inscription envoyée !</h2>
-        <p className="text-gray-500">Nous avons bien reçu votre demande. Notre équipe vous contactera dans les 48h.</p>
+        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <CheckCircle size={48} className="text-green-500" />
+        </div>
+        <h2 className="text-2xl font-bold text-[#1A1A2E] mb-3">Demande envoyée !</h2>
+        <p className="text-gray-500 mb-2">Nous avons bien reçu votre demande d&apos;inscription.</p>
+        <p className="text-gray-400 text-sm mb-8">Notre équipe vous contactera dans les <strong>48h</strong> pour confirmer votre inscription et vous communiquer les détails pratiques.</p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link href="/formations" className="btn-primary">Voir d&apos;autres cours</Link>
+          <Link href="/" className="btn-secondary">Retour à l&apos;accueil</Link>
+        </div>
       </div>
     </div>
   )
@@ -102,7 +110,8 @@ export default function InscriptionPage() {
               <textarea {...register('message')} rows={4} className="w-full border rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#E8001C] resize-none" placeholder="Questions, précisions..." />
             </div>
 
-            <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-60">
+            <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-60 inline-flex items-center justify-center gap-2">
+              {loading && <Loader2 size={16} className="animate-spin" />}
               {loading ? 'Envoi en cours...' : 'Envoyer ma demande d\'inscription'}
             </button>
           </form>
