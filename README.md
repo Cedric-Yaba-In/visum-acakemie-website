@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Visum Akademie — Site Vitrine
 
-## Getting Started
+Site vitrine complet avec dashboard admin pour la gestion des annonces et formations.
 
-First, run the development server:
+## Stack technique
+
+- **Next.js 14** (App Router) — Framework React
+- **TypeScript** — Typage statique
+- **Tailwind CSS** — Styles
+- **Prisma** — ORM
+- **PostgreSQL** — Base de données
+- **Jose** — JWT pour l'authentification admin
+- **bcryptjs** — Hashage des mots de passe
+- **Zod** — Validation des données
+- **React Hook Form** — Gestion des formulaires
+
+---
+
+## Installation et démarrage
+
+### 1. Installer les dépendances
+
+```bash
+npm install
+```
+
+### 2. Configurer la base de données
+
+Copie `.env.example` en `.env` et remplis les variables :
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/visum_akademie?schema=public"
+JWT_SECRET="une-cle-secrete-aleatoire-de-32-caracteres-minimum"
+NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+```
+
+### 3. Créer les tables en base
+
+```bash
+npm run db:migrate
+# ou pour un push rapide sans migration :
+npm run db:push
+```
+
+### 4. Peupler la base avec les données initiales
+
+```bash
+npm run db:seed
+```
+
+Cela crée :
+- **Admin** : `admin@visum-akademie.com` / `Admin@2024!`
+- 3 formations de démo
+- 2 annonces de démo
+
+### 5. Lancer le serveur de développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvre [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Pages du site
 
-## Learn More
+| URL | Description |
+|-----|-------------|
+| `/` | Accueil |
+| `/formations` | Catalogue des formations |
+| `/formations/[slug]` | Détail d'une formation |
+| `/annonces` | Liste des annonces |
+| `/annonces/[slug]` | Détail d'une annonce |
+| `/niveaux` | Guide des niveaux |
+| `/inscription` | Formulaire d'inscription |
+| `/contact` | Formulaire de contact |
 
-To learn more about Next.js, take a look at the following resources:
+## Dashboard Admin
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| URL | Description |
+|-----|-------------|
+| `/admin/login` | Connexion admin |
+| `/admin` | Dashboard (stats) |
+| `/admin/annonces` | Gestion des annonces |
+| `/admin/annonces/new` | Créer une annonce |
+| `/admin/annonces/[id]` | Modifier une annonce |
+| `/admin/formations` | Gestion des formations |
+| `/admin/formations/new` | Créer une formation |
+| `/admin/formations/[id]` | Modifier une formation |
+| `/admin/messages` | Messages de contact |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Déploiement sur Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Pousse le code sur GitHub
+2. Importe le projet sur [vercel.com](https://vercel.com)
+3. Ajoute les variables d'environnement dans les settings Vercel :
+   - `DATABASE_URL` (utilise [Neon](https://neon.tech) ou [Supabase](https://supabase.com) pour PostgreSQL gratuit)
+   - `JWT_SECRET`
+   - `NEXT_PUBLIC_SITE_URL`
+4. Déploie — Vercel exécute automatiquement `prisma generate && next build`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Base de données PostgreSQL gratuite recommandée
+
+- **Neon** : [neon.tech](https://neon.tech) — PostgreSQL serverless, tier gratuit généreux
+- **Supabase** : [supabase.com](https://supabase.com) — PostgreSQL + extras
+
+---
+
+## Commandes utiles
+
+```bash
+npm run dev          # Serveur de développement
+npm run build        # Build de production
+npm run db:migrate   # Créer une migration
+npm run db:push      # Push du schéma sans migration
+npm run db:seed      # Peupler la base
+npm run db:studio    # Interface visuelle Prisma Studio
+```
+
+---
+
+## Changer le mot de passe admin
+
+Après le seed, connecte-toi sur `/admin/login` avec les identifiants par défaut et change le mot de passe via Prisma Studio :
+
+```bash
+npm run db:studio
+```
