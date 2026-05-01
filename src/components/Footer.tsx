@@ -1,6 +1,34 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react'
+import { Mail, Phone, MapPin } from 'lucide-react'
+
+function IconFacebook() {
+  return (
+    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  )
+}
+
+function IconInstagram() {
+  return (
+    <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+function IconLinkedin() {
+  return (
+    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  )
+}
 
 export default function Footer() {
   return (
@@ -34,9 +62,9 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-4">Suivez-nous</h4>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-[#5ECFCF] transition-colors"><Facebook size={20} /></a>
-            <a href="#" className="hover:text-[#5ECFCF] transition-colors"><Instagram size={20} /></a>
-            <a href="#" className="hover:text-[#5ECFCF] transition-colors"><Linkedin size={20} /></a>
+            <a href="#" aria-label="Facebook" className="hover:text-[#5ECFCF] transition-colors"><IconFacebook /></a>
+            <a href="#" aria-label="Instagram" className="hover:text-[#5ECFCF] transition-colors"><IconInstagram /></a>
+            <a href="#" aria-label="LinkedIn" className="hover:text-[#5ECFCF] transition-colors"><IconLinkedin /></a>
           </div>
           <div className="mt-6">
             <h4 className="text-white font-semibold mb-2 text-sm">Horaires</h4>

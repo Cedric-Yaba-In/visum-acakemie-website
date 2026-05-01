@@ -15,13 +15,13 @@ const schema = z.object({
   debouches: z.string().optional(),
   formateur: z.string().min(2, 'Formateur requis'),
   duree: z.string().min(1, 'Durée requise'),
-  prix: z.coerce.number().positive('Prix invalide'),
+  prix: z.string().min(1, 'Prix requis').refine(v => !isNaN(Number(v)) && Number(v) > 0, 'Prix invalide'),
   publie: z.boolean(),
 })
 
 type FormData = z.infer<typeof schema>
 
-type Props = { defaultValues?: Partial<FormData>; formationId?: string }
+type Props = { defaultValues?: Partial<Omit<FormData, 'prix'>> & { prix?: number | string }; formationId?: string }
 
 export default function FormationForm({ defaultValues, formationId }: Props) {
   const router = useRouter()
@@ -29,35 +29,37 @@ export default function FormationForm({ defaultValues, formationId }: Props) {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { publie: true, niveau: 'DEBUTANT', ...defaultValues },
+    defaultValues: { publie: true, niveau: 'DEBUTANT', ...defaultValues, prix: defaultValues?.prix !== undefined ? String(defaultValues.prix) : '' },
   })
 
   async function onSubmit(data: FormData) {
     setLoading(true)
     const url = formationId ? `/api/admin/formations/${formationId}` : '/api/admin/formations'
     const method = formationId ? 'PUT' : 'POST'
-    await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...data, prix: Number(data.prix) }) })
     setLoading(false)
     router.push('/admin/formations')
     router.refresh()
   }
 
-  const field = (name: keyof FormData, label: string, required = false) => (
-    <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}{required && ' *'}</label>
-      <input {...register(name as any)} className="w-full border rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#E8001C]" />
-      {errors[name] && <p className="text-red-500 text-xs mt-1">{(errors[name] as any)?.message}</p>}
-    </div>
-  )
+  const textFields: { name: keyof FormData; label: string }[] = [
+    { name: 'titre', label: 'Titre' },
+    { name: 'domaine', label: 'Domaine' },
+    { name: 'formateur', label: 'Formateur' },
+    { name: 'duree', label: 'Durée (ex: 3 mois)' },
+    { name: 'prix', label: 'Prix (€)' },
+  ]
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white rounded-xl shadow-sm p-8">
       <div className="grid md:grid-cols-2 gap-6">
-        {field('titre', 'Titre', true)}
-        {field('domaine', 'Domaine', true)}
-        {field('formateur', 'Formateur', true)}
-        {field('duree', 'Durée (ex: 3 mois)', true)}
-        {field('prix', 'Prix (€)', true)}
+        {textFields.map(({ name, label }) => (
+          <div key={name}>
+            <label className="block text-sm font-medium text-gray-700 mb-1">{label} *</label>
+            <input {...register(name)} className="w-full border rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#E8001C]" />
+            {errors[name] && <p className="text-red-500 text-xs mt-1">{errors[name]?.message as string}</p>}
+          </div>
+        ))}
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Niveau *</label>

@@ -21,7 +21,7 @@ export default async function AnnoncesPage({ searchParams }: { searchParams: { c
   const annonces = await prisma.annonce.findMany({
     where: {
       statut: 'PUBLIE',
-      ...(categorie ? { categorie: categorie as any } : {}),
+      ...(categorie ? { categorie: categorie as 'ACTUALITE' | 'EVENEMENT' | 'OFFRE' | 'RESULTAT' | 'AUTRE' } : {}),
     },
     orderBy: { createdAt: 'desc' },
   })

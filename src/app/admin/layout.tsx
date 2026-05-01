@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Bell, BookOpen, MessageSquare, LogOut, Users } from 'lucide-react'
+import { LayoutDashboard, Bell, BookOpen, MessageSquare, LogOut } from 'lucide-react'
 
 const navItems = [
   { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },

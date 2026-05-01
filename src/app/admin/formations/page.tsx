@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
-import { Plus, Pencil, Trash2, Eye } from 'lucide-react'
+import { Plus, Pencil, Eye } from 'lucide-react'
 import DeleteFormationButton from './DeleteButton'
 
 export default async function AdminFormationsPage() {

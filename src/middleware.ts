@@ -1,12 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { verifyToken } from '@/lib/auth'
+import { jwtVerify } from 'jose'
+
+export const runtime = 'nodejs'
+
+const secret = new TextEncoder().encode(process.env.JWT_SECRET ?? 'fallback-secret')
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
     const token = req.cookies.get('admin_token')?.value
-    if (!token || !(await verifyToken(token))) {
+    if (!token) {
+      return NextResponse.redirect(new URL('/admin/login', req.url))
+    }
+    try {
+      await jwtVerify(token, secret)
+    } catch {
       return NextResponse.redirect(new URL('/admin/login', req.url))
     }
   }

@@ -19,7 +19,7 @@ export default async function FormationsPage({ searchParams }: { searchParams: {
   const formations = await prisma.formation.findMany({
     where: {
       publie: true,
-      ...(niveau ? { niveau: niveau as any } : {}),
+      ...(niveau ? { niveau: niveau as 'DEBUTANT' | 'ELEMENTAIRE' | 'INTERMEDIAIRE' | 'AVANCE' | 'EXPERT' } : {}),
       ...(domaine ? { domaine: { contains: domaine, mode: 'insensitive' } } : {}),
     },
     orderBy: { createdAt: 'desc' },
