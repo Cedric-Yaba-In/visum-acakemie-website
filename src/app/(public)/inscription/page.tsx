@@ -2,7 +2,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { CheckCircle, Loader2 } from 'lucide-react'
 import Link from 'next/link'
@@ -21,7 +21,7 @@ type FormData = z.infer<typeof schema>
 
 type Formation = { id: string; titre: string; niveau: string }
 
-export default function InscriptionPage() {
+function InscriptionForm() {
   const searchParams = useSearchParams()
   const formationParam = searchParams.get('formation') || ''
   const [success, setSuccess] = useState(false)
@@ -173,5 +173,13 @@ export default function InscriptionPage() {
         </div>
       </section>
     </>
+  )
+}
+
+export default function InscriptionPage() {
+  return (
+    <Suspense fallback={<div className="min-h-[70vh] flex items-center justify-center"><Loader2 className="animate-spin" /></div>}>
+      <InscriptionForm />
+    </Suspense>
   )
 }
