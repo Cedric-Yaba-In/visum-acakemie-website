@@ -18,14 +18,26 @@ type FormData = z.infer<typeof schema>
 export default function ContactPage() {
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({ resolver: zodResolver(schema) })
 
   async function onSubmit(data: FormData) {
     setLoading(true)
-    const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-    setLoading(false)
-    if (res.ok) setSuccess(true)
+    setError('')
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      if (res.ok) {
+        setSuccess(true)
+      } else {
+        const json = await res.json()
+        setError(json.error || 'Une erreur est survenue. Veuillez réessayer.')
+      }
+    } catch {
+      setError('Impossible de contacter le serveur. Vérifiez votre connexion.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -70,6 +82,11 @@ export default function ContactPage() {
                 <textarea {...register('message')} rows={5} className="w-full border rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-[#E8001C] resize-none" />
                 {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
               </div>
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-lg">
+                  {error}
+                </div>
+              )}
               <button type="submit" disabled={loading} className="btn-primary w-full disabled:opacity-60 inline-flex items-center justify-center gap-2">
                 {loading && <Loader2 size={16} className="animate-spin" />}
                 {loading ? 'Envoi...' : 'Envoyer le message'}
@@ -103,8 +120,9 @@ export default function ContactPage() {
 
           <div className="rounded-xl overflow-hidden h-64 bg-gray-200">
             <iframe
-              // src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.292292615674!3d48.858370079287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUxJzMwLjEiTiAywr8xNyczMi4yIkU!5e0!3m2!1sfr!2sfr!4v1620000000000"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15930.123456789!2d10.5167!3d5.1333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x105f4b0000000001%3A0x0!2sBanganté%2C%20Cameroun!5e0!3m2!1sfr!2scm!4v1700000000000"
               width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
         </div>

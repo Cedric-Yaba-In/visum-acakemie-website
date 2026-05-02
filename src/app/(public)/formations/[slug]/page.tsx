@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { Clock, User, Euro, CheckCircle, ArrowLeft, BookOpen } from 'lucide-react'
+import { Clock, User, CheckCircle, ArrowLeft, BookOpen } from 'lucide-react'
 import type { Metadata } from 'next'
 
 type Props = { params: { slug: string } }
@@ -72,11 +72,11 @@ export default async function FormationDetailPage({ params }: Props) {
 
         <div className="md:col-span-1">
           <div className="card p-6 sticky top-24">
-            <div className="text-3xl font-bold text-[#E8001C] mb-6">{formation.prix} €</div>
+            <div className="text-3xl font-bold text-[#E8001C] mb-6">{formation.prix.toLocaleString('fr-FR')} FCFA</div>
             <div className="space-y-4 mb-6 text-sm text-gray-600">
               <div className="flex items-center gap-3"><Clock size={16} className="text-[#5ECFCF]" /><span><strong>Durée :</strong> {formation.duree}</span></div>
               <div className="flex items-center gap-3"><User size={16} className="text-[#5ECFCF]" /><span><strong>Formateur :</strong> {formation.formateur}</span></div>
-              <div className="flex items-center gap-3"><Euro size={16} className="text-[#5ECFCF]" /><span><strong>Niveau :</strong> {formation.niveau}</span></div>
+              <div className="flex items-center gap-3"><BookOpen size={16} className="text-[#5ECFCF]" /><span><strong>Niveau :</strong> {formation.niveau}</span></div>
             </div>
             <Link href={`/inscription?formation=${encodeURIComponent(formation.titre)}`} className="btn-primary w-full text-center block">
               S&apos;inscrire à cette formation

@@ -17,7 +17,7 @@ export default async function AdminDashboardPage() {
     { icon: Bell, label: 'Annonces', value: annonces, href: '/admin/annonces', color: 'bg-blue-500' },
     { icon: BookOpen, label: 'Formations', value: formations, href: '/admin/formations', color: 'bg-green-500' },
     { icon: MessageSquare, label: 'Messages non lus', value: messages, href: '/admin/messages', color: 'bg-orange-500' },
-    { icon: Users, label: 'Inscriptions en attente', value: inscriptions, href: '#', color: 'bg-[#E8001C]' },
+    { icon: Users, label: 'Inscriptions en attente', value: inscriptions, href: '/admin/inscriptions?statut=en-attente', color: 'bg-[#E8001C]' },
   ]
 
   return (

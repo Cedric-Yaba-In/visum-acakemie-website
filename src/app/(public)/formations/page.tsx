@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
-import { BookOpen, Clock, Euro, User } from 'lucide-react'
+import { BookOpen, Clock, User } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Formations' }
@@ -77,7 +77,7 @@ export default async function FormationsPage({ searchParams }: { searchParams: {
                     <div className="grid grid-cols-3 gap-2 text-xs text-gray-500 border-t pt-4">
                       <div className="flex items-center gap-1"><Clock size={12} />{f.duree}</div>
                       <div className="flex items-center gap-1"><User size={12} />{f.formateur}</div>
-                      <div className="flex items-center gap-1 font-bold text-[#E8001C]"><Euro size={12} />{f.prix}</div>
+                      <div className="font-bold text-[#E8001C]">{f.prix.toLocaleString('fr-FR')} FCFA</div>
                     </div>
                   </div>
                 </Link>

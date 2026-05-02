@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 
 const links = [
@@ -13,6 +14,12 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+
+  function isActive(href: string) {
+    if (href === '/') return pathname === '/'
+    return pathname.startsWith(href)
+  }
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -24,13 +31,24 @@ export default function Navbar() {
             <span className="ml-1.5 text-xs font-semibold text-[#5ECFCF] uppercase tracking-widest hidden sm:inline">🇩🇪 Deutsch</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-1">
             {links.map(l => (
-              <Link key={l.href} href={l.href} className="text-gray-700 hover:text-[#E8001C] font-medium transition-colors">
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`relative px-4 py-2 rounded-lg font-medium text-sm transition-colors
+                  ${isActive(l.href)
+                    ? 'text-[#E8001C]'
+                    : 'text-gray-600 hover:text-[#E8001C] hover:bg-red-50'
+                  }`}
+              >
                 {l.label}
+                {isActive(l.href) && (
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-[#E8001C] rounded-full" />
+                )}
               </Link>
             ))}
-            <Link href="/inscription" className="btn-primary text-sm py-2">
+            <Link href="/inscription" className="btn-primary text-sm py-2 ml-4">
               S&apos;inscrire
             </Link>
           </div>
@@ -42,13 +60,22 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden bg-white border-t px-4 py-4 flex flex-col gap-4">
+        <div className="md:hidden bg-white border-t px-4 py-4 flex flex-col gap-1">
           {links.map(l => (
-            <Link key={l.href} href={l.href} className="text-gray-700 hover:text-[#E8001C] font-medium" onClick={() => setOpen(false)}>
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className={`px-4 py-2.5 rounded-lg font-medium text-sm transition-colors
+                ${isActive(l.href)
+                  ? 'bg-[#E8001C] text-white'
+                  : 'text-gray-600 hover:bg-red-50 hover:text-[#E8001C]'
+                }`}
+            >
               {l.label}
             </Link>
           ))}
-          <Link href="/inscription" className="btn-primary text-center text-sm" onClick={() => setOpen(false)}>
+          <Link href="/inscription" className="btn-primary text-center text-sm mt-2" onClick={() => setOpen(false)}>
             S&apos;inscrire
           </Link>
         </div>

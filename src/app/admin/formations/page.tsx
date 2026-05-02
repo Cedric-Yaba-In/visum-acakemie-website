@@ -40,7 +40,7 @@ export default async function AdminFormationsPage() {
                   <span className="badge bg-blue-100 text-blue-700 text-xs">{f.niveau}</span>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-500">{f.domaine}</td>
-                <td className="px-6 py-4 text-sm font-semibold text-[#E8001C]">{f.prix} €</td>
+                <td className="px-6 py-4 text-sm font-semibold text-[#E8001C]">{f.prix.toLocaleString('fr-FR')} FCFA</td>
                 <td className="px-6 py-4">
                   <span className={`badge text-xs ${f.publie ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                     {f.publie ? 'Publié' : 'Masqué'}

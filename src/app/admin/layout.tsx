@@ -2,12 +2,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, Bell, BookOpen, MessageSquare, LogOut } from 'lucide-react'
+import { LayoutDashboard, Bell, BookOpen, MessageSquare, LogOut, Users } from 'lucide-react'
 
 const navItems = [
   { href: '/admin', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/admin/annonces', icon: Bell, label: 'Annonces' },
   { href: '/admin/formations', icon: BookOpen, label: 'Formations' },
+  { href: '/admin/inscriptions', icon: Users, label: 'Inscriptions' },
   { href: '/admin/messages', icon: MessageSquare, label: 'Messages' },
 ]
 

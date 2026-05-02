@@ -241,7 +241,7 @@ export default async function HomePage() {
                     <h3 className="font-bold text-[#1A1A2E] mb-1 group-hover:text-[#E8001C] transition-colors">{f.titre}</h3>
                     <p className="text-gray-500 text-sm mb-3 line-clamp-2">{f.description}</p>
                     <div className="flex items-center justify-between">
-                      <span className="text-[#E8001C] font-bold">{f.prix} €</span>
+                      <span className="text-[#E8001C] font-bold">{f.prix.toLocaleString('fr-FR')} FCFA</span>
                       <span className="text-gray-400 text-xs">{f.duree}</span>
                     </div>
                   </div>

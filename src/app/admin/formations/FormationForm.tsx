@@ -55,7 +55,7 @@ export default function FormationForm({ defaultValues, formationId }: Props) {
     { name: 'domaine', label: 'Domaine' },
     { name: 'formateur', label: 'Formateur' },
     { name: 'duree', label: 'Durée (ex: 3 mois)' },
-    { name: 'prix', label: 'Prix (€)' },
+    { name: 'prix', label: 'Prix (FCFA)' },
   ]
 
   return (
