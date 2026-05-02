@@ -102,7 +102,7 @@ export default function ContactPage() {
               {[
                 { icon: MapPin, label: 'Adresse', value: 'Tchougo, Bangangté, Ouest Cameroun' },
                 { icon: Phone, label: 'Téléphone', value: '+237 653 78 04 08' },
-                { icon: Mail, label: 'Email', value: 'contact@visumakademie.com' },
+                { icon: Mail, label: 'Email', value: 'contact@visumplusakademie.com' },
                 { icon: Clock, label: 'Horaires', value: 'Lun–Ven : 8h–18h | Sam : 9h–13h' },
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-start gap-4">

@@ -16,12 +16,12 @@ async function main() {
   const hashedPassword = await bcrypt.hash('Admin@2026!', 12)
   await prisma.admin.create({
     data: {
-      email: 'admin@visum-akademie.com',
+      email: 'admin@visumplusakademie.com',
       password: hashedPassword,
       nom: 'Administrateur',
     },
   })
-  console.log('✅ Admin créé : admin@visum-akademie.com / Admin@2026!')
+  console.log('✅ Admin créé : admin@visumplusakademie.com / Admin@2026!')
 
   // ── Formations ──
   await prisma.formation.createMany({

@@ -55,7 +55,7 @@ export default function Footer() {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2"><MapPin size={16} className="mt-0.5 text-[#5ECFCF] shrink-0" /><span>Tchougo, Bangangté, Ouest Cameroun</span></li>
             <li className="flex items-center gap-2"><Phone size={16} className="text-[#5ECFCF]" /><span>+237 653 78 04 08</span></li>
-            <li className="flex items-center gap-2"><Mail size={16} className="text-[#5ECFCF]" /><span>contact@visumakademie.com</span></li>
+            <li className="flex items-center gap-2"><Mail size={16} className="text-[#5ECFCF]" /><span>contact@visumplusakademie.com</span></li>
           </ul>
         </div>
 
