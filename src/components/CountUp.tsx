@@ -26,7 +26,7 @@ export default function CountUp({ value, duration = 1500 }: Props) {
       if (entry.isIntersecting && !started.current) {
         started.current = true
         const start = performance.now()
-        function step(now: number) {
+        const step = (now: number) => {
           const progress = Math.min((now - start) / duration, 1)
           // easeOutQuart
           const eased = 1 - Math.pow(1 - progress, 4)

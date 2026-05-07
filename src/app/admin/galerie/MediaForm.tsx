@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
 import { useState, useCallback } from 'react'
+import NextImage from 'next/image'
 import { Loader2, Image as ImageIcon, Play } from 'lucide-react'
 import Toast, { ToastData } from '@/components/Toast'
 
@@ -14,11 +15,11 @@ const schema = z.object({
   type: z.enum(['PHOTO', 'VIDEO']),
   categorie: z.enum(['COURS', 'EVENEMENT', 'EXAMENS', 'VIE_CAMPUS', 'ALLEMAGNE', 'AUTRE']),
   publie: z.boolean(),
-  ordre: z.coerce.number().default(0),
+  ordre: z.string().optional(),
 })
 
 type FormData = z.infer<typeof schema>
-type Props = { defaultValues?: Partial<FormData>; mediaId?: string }
+type Props = { defaultValues?: Partial<Omit<FormData, 'ordre'> & { ordre?: number | string }>; mediaId?: string }
 
 const categories = [
   { value: 'COURS', label: 'Cours' },
@@ -38,17 +39,17 @@ export default function MediaForm({ defaultValues, mediaId }: Props) {
 
   const { register, handleSubmit, watch, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { publie: true, type: 'PHOTO', categorie: 'COURS', ordre: 0, ...defaultValues },
+    defaultValues: { publie: true, type: 'PHOTO', categorie: 'COURS', ...defaultValues, ordre: String(defaultValues?.ordre ?? 0) },
   })
 
-  const urlValue = watch('url')
   const typeValue = watch('type')
 
   async function onSubmit(data: FormData) {
     setLoading(true)
     const url = mediaId ? `/api/admin/galerie/${mediaId}` : '/api/admin/galerie'
     const method = mediaId ? 'PUT' : 'POST'
-    const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+    const payload = { ...data, ordre: Number(data.ordre ?? 0) }
+    const res = await fetch(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
     setLoading(false)
     if (res.ok) {
       setToast({ type: 'success', message: mediaId ? 'Média mis à jour !' : 'Média ajouté à la galerie !' })
@@ -120,7 +121,7 @@ export default function MediaForm({ defaultValues, mediaId }: Props) {
           <div className="rounded-xl overflow-hidden border border-gray-200 bg-gray-50">
             <p className="text-xs text-gray-400 px-4 py-2 border-b">Prévisualisation</p>
             {typeValue === 'PHOTO' ? (
-              <img src={preview} alt="preview" className="max-h-48 w-full object-contain p-2" onError={() => setPreview('')} />
+              <NextImage src={preview} alt="preview" width={600} height={300} className="max-h-48 w-full object-contain p-2" unoptimized onError={() => setPreview('')} />
             ) : (
               preview.includes('youtube') || preview.includes('youtu.be') ? (
                 <div className="aspect-video">

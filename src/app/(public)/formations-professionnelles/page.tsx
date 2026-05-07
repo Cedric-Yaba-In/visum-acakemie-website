@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import {
-  CheckCircle, ArrowRight, Star, Clock, Globe, Shield,
-  Heart, Stethoscope, Wrench, ChefHat, Baby, Leaf,
+  CheckCircle, ArrowRight, Star, Clock, Shield, Plane, BookOpen,
+  Stethoscope, Wrench, ChefHat, Baby, Leaf,
   Building2, Cpu, Scissors, AlertCircle, FileText,
   Banknote, Home, Users, GraduationCap, Award
 } from 'lucide-react'
@@ -18,7 +18,7 @@ const avantages = [
   { icon: Award, titre: 'Diplôme reconnu internationalement', desc: "Le diplôme allemand (Berufsabschluss) est reconnu dans toute l'Union Européenne et dans de nombreux pays du monde.", color: 'bg-blue-500' },
   { icon: Home, titre: 'Résidence permanente', desc: 'Après 2 ans de travail post-formation, vous pouvez obtenir un titre de séjour permanent en Allemagne.', color: 'bg-purple-500' },
   { icon: Shield, titre: 'Protection sociale complète', desc: 'Assurance maladie, retraite, chômage — vous bénéficiez de toute la protection sociale allemande dès le début.', color: 'bg-orange-500' },
-  { icon: Globe, titre: 'Visa de travail facilité', desc: "L'Allemagne délivre des visas spéciaux pour les candidats à l'Ausbildung. Visum Akademie vous accompagne dans les démarches.", color: 'bg-[#5ECFCF]' },
+  { icon: Plane, titre: 'Visa de travail facilité', desc: "L'Allemagne délivre des visas spéciaux pour les candidats à l'Ausbildung. Visum Akademie vous accompagne dans les démarches.", color: 'bg-[#5ECFCF]' },
   { icon: Star, titre: 'Évolution de carrière rapide', desc: "Après votre Ausbildung, vous pouvez évoluer vers un poste de Meister (maître artisan) ou poursuivre des études supérieures.", color: 'bg-[#E8001C]' },
 ]
 
@@ -104,7 +104,7 @@ const criteres = [
     items: ['Baccalauréat ou équivalent (minimum)', 'BEP / CAP accepté pour certains métiers techniques', 'Diplôme universitaire (Licence) pour les filières santé avancées'],
   },
   {
-    icon: Globe, titre: "Niveau d'allemand",
+    icon: BookOpen, titre: "Niveau d'allemand",
     items: ['B1 minimum requis pour la plupart des formations', 'B2 recommandé pour les filières santé et social', 'A2 accepté pour certains postes techniques avec formation linguistique intégrée', 'Certification Goethe, TELC ou ÖSD exigée'],
   },
   {

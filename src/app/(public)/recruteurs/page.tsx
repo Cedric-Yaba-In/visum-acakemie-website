@@ -125,8 +125,8 @@ export default function RecruteursPage() {
             </div>
           </Reveal>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            {secteurs.map((s, i) => (
-              <Reveal key={s} animation="zoom" delay={i * 50} className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:border-[#E8001C] hover:shadow-md transition-all">
+            {secteurs.map((s, idx) => (
+              <Reveal key={s} animation="zoom" delay={idx * 50} className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100 hover:border-[#E8001C] hover:shadow-md transition-all">
                 <CheckCircle size={18} className="text-[#E8001C] mx-auto mb-2" />
                 <p className="text-sm font-medium text-[#1A1A2E]">{s}</p>
               </Reveal>
@@ -137,7 +137,7 @@ export default function RecruteursPage() {
             <div className="bg-[#1A1A2E] rounded-2xl p-8 text-white">
               <h3 className="text-xl font-bold text-[#5ECFCF] mb-8 text-center">Comment fonctionne la mise en relation ?</h3>
               <div className="grid md:grid-cols-4 gap-6">
-                {processus.map((e, i) => (
+                {processus.map((e) => (
                   <div key={e.num} className="text-center">
                     <div className="w-12 h-12 bg-[#E8001C] rounded-xl flex items-center justify-center font-black text-white text-lg mx-auto mb-4">{e.num}</div>
                     <h4 className="font-bold text-white mb-2 text-sm">{e.titre}</h4>

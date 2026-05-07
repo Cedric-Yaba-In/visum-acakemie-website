@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
-import { BookOpen, Users, Award, TrendingUp, ArrowRight, Calendar, Tag, Quote, CheckCircle, Globe, GraduationCap, Mic, PenLine, Target, Eye, Heart, Mail, FileText, Headphones } from 'lucide-react'
+import { BookOpen, Users, Award, TrendingUp, ArrowRight, Calendar, Tag, Quote, CheckCircle, GraduationCap, Mic, PenLine, Target, Eye, Heart, Mail, FileText, Headphones } from 'lucide-react'
 import Reveal from '@/components/Reveal'
 import CountUp from '@/components/CountUp'
 
@@ -173,7 +173,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <Reveal animation="fade-up">
             <div className="text-center mb-12">
-              <h2 className="section-title">Tous les niveaux d'apprentissage</h2>
+              <h2 className="section-title">Tous les niveaux d&apos;apprentissage</h2>
               <p className="section-subtitle">
                 Du grand débutant au bilingue, Visum Akademie propose un parcours complet conforme au Cadre Européen Commun de Référence pour les langues.
               </p>
@@ -245,10 +245,10 @@ export default async function HomePage() {
             <Reveal animation="fade-left" delay={150} className="md:col-span-2">
               <Quote size={40} className="text-[#E8001C] mb-4 opacity-60" />
               <p className="text-gray-300 text-lg leading-relaxed mb-4 italic">
-                &ldquo;Chez Visum+ Akademie, nous croyons que l&apos;apprentissage de l&apos;allemand est bien plus qu&apos;une comp&eacute;tence linguistique &mdash; c&apos;est une ouverture sur une culture riche, une &eacute;conomie dynamique et des opportunit&eacute;s professionnelles exceptionnelles.
+              &ldquo;Chez Visum+ Akademie, nous croyons que l&apos;apprentissage de l&apos;allemand est bien plus qu&apos;une comp&eacute;tence linguistique &mdash; c&apos;est une ouverture sur une culture riche, une &eacute;conomie dynamique et des opportunit&eacute;s professionnelles exceptionnelles.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 italic">
-                Notre mission est de vous offrir un enseignement rigoureux, vivant et adapt&eacute; &agrave; vos objectifs, qu&apos;il s&apos;agisse de voyager, de travailler ou de vous certifier. Chaque apprenant est unique, et nous nous engageons &agrave; l&apos;accompagner jusqu&apos;&agrave; la r&eacute;ussite.&rdquo;
+              Notre mission est de vous offrir un enseignement rigoureux, vivant et adapt&eacute; &agrave; vos objectifs, qu&apos;il s&apos;agisse de voyager, de travailler ou de vous certifier. Chaque apprenant est unique, et nous nous engageons &agrave; l&apos;accompagner jusqu&apos;&agrave; la r&eacute;ussite.&rdquo;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-0.5 bg-[#E8001C]" />

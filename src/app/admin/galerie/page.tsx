@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
+import NextImage from 'next/image'
 import { Plus, Pencil, Eye, Image as ImageIcon, Play } from 'lucide-react'
 import DeleteMediaButton from './DeleteButton'
 
@@ -41,13 +42,13 @@ export default async function AdminGaleriePage() {
               {/* Miniature */}
               <div className="relative h-40 bg-gray-100">
                 {m.type === 'PHOTO' ? (
-                  <img src={m.url} alt={m.titre} className="w-full h-full object-cover" />
+                  <NextImage src={m.url} alt={m.titre} fill className="object-cover" unoptimized />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-[#1A1A2E]">
                     {m.url.includes('youtube') || m.url.includes('youtu.be') ? (
-                      <img
+                      <NextImage
                         src={`https://img.youtube.com/vi/${m.url.match(/(?:v=|youtu\.be\/)([^&\n?#]+)/)?.[1]}/hqdefault.jpg`}
-                        alt={m.titre} className="w-full h-full object-cover opacity-70"
+                        alt={m.titre} fill className="object-cover opacity-70" unoptimized
                       />
                     ) : (
                       <Play size={32} className="text-white/50" />

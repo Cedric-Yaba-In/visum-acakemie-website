@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
+import NextImage from 'next/image'
 import { X, Image as ImageIcon, ChevronLeft, ChevronRight, ZoomIn, Camera, Video, BookOpen, CalendarDays, Trophy, Building2, Plane, LayoutGrid, FolderOpen } from 'lucide-react'
 import React from 'react'
 import Reveal from '@/components/Reveal'
@@ -146,7 +147,7 @@ export default function GaleriePage() {
                     <div
                       className="break-inside-avoid group relative cursor-pointer rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow"
                       onClick={() => setLightbox(lightboxItems.findIndex(li => li.id === m.id))}>
-                      <img src={m.url} alt={m.titre} className="w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                      <NextImage src={m.url} alt={m.titre} fill className="w-full object-cover group-hover:scale-105 transition-transform duration-300" sizes="(max-width: 768px) 50vw, 25vw" unoptimized />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                         <div className="absolute bottom-0 left-0 right-0 p-4">
                           <p className="text-white font-semibold text-sm">{m.titre}</p>
@@ -242,12 +243,17 @@ export default function GaleriePage() {
             </>
           )}
 
-          <div className="max-w-5xl w-full mx-4" onClick={e => e.stopPropagation()}>
-            <img
-              src={lightboxItems[lightbox].url}
-              alt={lightboxItems[lightbox].titre}
-              className="max-h-[75vh] w-full object-contain rounded-xl"
-            />
+            <div className="max-w-5xl w-full mx-4" onClick={e => e.stopPropagation()}>
+            <div className="relative max-h-[75vh] w-full">
+              <NextImage
+                src={lightboxItems[lightbox].url}
+                alt={lightboxItems[lightbox].titre}
+                width={1200}
+                height={800}
+                className="max-h-[75vh] w-full object-contain rounded-xl"
+                unoptimized
+              />
+            </div>
             <div className="mt-4 text-center">
               <p className="text-white font-semibold text-lg">{lightboxItems[lightbox].titre}</p>
               {lightboxItems[lightbox].description && (
