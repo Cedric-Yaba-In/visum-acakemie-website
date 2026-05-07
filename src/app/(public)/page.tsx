@@ -1,7 +1,35 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
-import { BookOpen, Users, Award, TrendingUp, ArrowRight, Calendar, Tag, Quote, CheckCircle, Globe, GraduationCap, Mic, PenLine } from 'lucide-react'
+import { BookOpen, Users, Award, TrendingUp, ArrowRight, Calendar, Tag, Quote, CheckCircle, Globe, GraduationCap, Mic, PenLine, Target, Eye, Heart, Mail } from 'lucide-react'
+
+function IconLinkedin() {
+  return (
+    <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  )
+}
+
+function IconFacebook() {
+  return (
+    <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+    </svg>
+  )
+}
+
+function IconInstagram() {
+  return (
+    <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
 
 const stats = [
   { icon: Users, value: ' 50+', label: 'Apprenants formés' },
@@ -52,6 +80,42 @@ const categorieColors: Record<string, string> = {
   AUTRE: 'bg-gray-100 text-gray-700',
 }
 
+const equipe = [
+  {
+    nom: 'Boris Kouamen Nwandji',
+    titre: 'Co-Fondateur & CEO',
+    role: 'Direction',
+    bio: 'Passionné de langue allemande et d\'entrepreneuriat, Boris a fondé Visum+ Akademie avec la conviction que l\'allemand est un vecteur d\'opportunités exceptionnelles pour la jeunesse africaine.',
+    photo: null,
+    linkedin: '#',
+    facebook: '#',
+    instagram: '#',
+    email: 'boris@visumplusakademie.com',
+  },
+  {
+    nom: 'Formateur Principal',
+    titre: 'Formateur certifié — Niveaux A1 à C1',
+    role: 'Pédagogie',
+    bio: 'Certifié Goethe-Institut, notre formateur principal accompagne les apprenants de tous niveaux avec une méthode communicative et immersive, axée sur la pratique orale et écrite.',
+    photo: null,
+    linkedin: '#',
+    facebook: '#',
+    instagram: null,
+    email: 'formation@visumplusakademie.com',
+  },
+  {
+    nom: 'Coordinatrice Pédagogique',
+    titre: 'Coordination & Suivi des apprenants',
+    role: 'Administration',
+    bio: 'Responsable du suivi individuel de chaque apprenant, elle veille à la qualité des parcours de formation et assure le lien entre les apprenants, les formateurs et les partenaires.',
+    photo: null,
+    linkedin: '#',
+    facebook: '#',
+    instagram: '#',
+    email: 'contact@visumplusakademie.com',
+  },
+]
+
 export default async function HomePage() {
   const [formations, annonces] = await Promise.all([
     prisma.formation.findMany({ where: { publie: true }, take: 4, orderBy: { createdAt: 'desc' } }),
@@ -90,7 +154,11 @@ export default async function HomePage() {
       </section>
 
       {/* ── STATS ── */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-[#E8001C]/4" />
+          <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-[#5ECFCF]/4" />
+        </div>
         <div className="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map(({ icon: Icon, value, label }) => (
             <div key={label} className="text-center">
@@ -105,7 +173,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── NIVEAUX CECR ── */}
-      <section className="py-20 bg-[#F5F5F5]">
+      <section className="py-20 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #f0f4ff 0%, #F5F5F5 50%, #fff5f5 100%)'}}>
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="section-title">Tous les niveaux d'apprentissage</h2>
@@ -131,7 +199,18 @@ export default async function HomePage() {
       </section>
 
       {/* ── COMPÉTENCES TRAVAILLÉES ── */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <svg className="absolute top-0 left-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="dots-comp" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="2" fill="#1A1A2E" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots-comp)" />
+          </svg>
+          <div className="absolute top-10 right-10 w-72 h-72 rounded-full bg-[#5ECFCF]/5 blur-3xl" />
+        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="section-title">4 compétences, une langue maîtrisée</h2>
@@ -181,7 +260,11 @@ export default async function HomePage() {
       </section>
 
       {/* ── POURQUOI NOUS CHOISIR ── */}
-      <section className="py-20 bg-[#F5F5F5]">
+      <section className="py-20 relative overflow-hidden" style={{background: 'linear-gradient(160deg, #fafafa 0%, #F5F5F5 40%, #f0f8ff 100%)'}}>
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#E8001C]/3 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#5ECFCF]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
+        </div>
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="section-title">Pourquoi choisir Visum+ Akademie ?</h2>
@@ -204,9 +287,9 @@ export default async function HomePage() {
             <h3 className="text-xl font-bold mb-6 text-[#5ECFCF]">Certifications préparées</h3>
             <div className="space-y-4">
               {[
-                { cert: 'Goethe-Zertifikat', niveaux: 'A1 → C2', desc: 'La certification allemande la plus reconnue mondialement' },
+                { cert: 'Goethe-Zertifikat', niveaux: 'A1 → C1', desc: 'La certification allemande la plus reconnue mondialement' },
                 { cert: 'TELC Deutsch', niveaux: 'A1 → C1', desc: 'Certification européenne des langues, reconnue par les employeurs' },
-                { cert: 'ÖSD', niveaux: 'A2 → C2', desc: 'Diplôme autrichien de langue allemande' },
+                { cert: 'ÖSD', niveaux: 'A2 → C1', desc: 'Diplôme autrichien de langue allemande' },
                 { cert: 'ECL', niveaux: 'B2 → C1', desc: 'Requis pour les études universitaires en Allemagne' },
               ].map(c => (
                 <div key={c.cert} className="border border-white/10 rounded-xl p-4">
@@ -222,8 +305,160 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── VISION ── */}
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <svg className="absolute top-0 left-0 w-full h-full opacity-[0.025]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid-vision" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1A1A2E" strokeWidth="1"/>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-vision)" />
+          </svg>
+          <div className="absolute -top-20 -left-20 w-96 h-96 rounded-full bg-[#E8001C]/4 blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 w-96 h-96 rounded-full bg-[#5ECFCF]/5 blur-3xl" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-14">
+            <h2 className="section-title">Notre Vision</h2>
+            <p className="section-subtitle">
+              Ce qui nous anime chaque jour et guide chacune de nos décisions pédagogiques.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 mb-14">
+            {[
+              {
+                icon: Target,
+                titre: 'Notre Mission',
+                couleur: 'bg-[#E8001C]',
+                texte: 'Rendre la langue allemande accessible à tous les apprenants africains, en leur offrant une formation de qualité internationale, ancrée dans leur réalité et orientée vers leurs ambitions.',
+              },
+              {
+                icon: Eye,
+                titre: 'Notre Vision',
+                couleur: 'bg-[#1A1A2E]',
+                texte: 'Devenir le centre de référence en Afrique centrale pour l\'apprentissage de l\'allemand et l\'accompagnement vers les opportunités professionnelles en Allemagne et en Europe.',
+              },
+              {
+                icon: Heart,
+                titre: 'Nos Valeurs',
+                couleur: 'bg-[#5ECFCF]',
+                texte: 'Excellence pédagogique, bienveillance envers chaque apprenant, rigueur dans l\'enseignement, ouverture culturelle et engagement total pour la réussite de chacun.',
+              },
+            ].map(({ icon: Icon, titre, couleur, texte }) => (
+              <div key={titre} className="relative bg-[#F5F5F5] rounded-2xl p-8 hover:shadow-lg transition-shadow">
+                <div className={`${couleur} w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-md`}>
+                  <Icon size={26} className="text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-[#1A1A2E] mb-3">{titre}</h3>
+                <p className="text-gray-500 leading-relaxed text-sm">{texte}</p>
+                <div className={`absolute bottom-0 left-8 right-8 h-0.5 ${couleur} rounded-full opacity-30`} />
+              </div>
+            ))}
+          </div>
+
+          {/* Ligne de valeurs chiffrées */}
+          <div className="bg-gradient-to-r from-[#1A1A2E] to-[#0F3460] rounded-2xl p-8 grid grid-cols-2 md:grid-cols-3 gap-6 text-white text-center">
+            {[
+              { value: '2022', label: 'Année de fondation' },
+              { value: 'Bangangté', label: 'Siège — Cameroun' },
+              { value: 'A1 → C1', label: 'Niveaux couverts' },
+            ].map(s => (
+              <div key={s.label}>
+                <div className="text-2xl font-black text-[#5ECFCF] mb-1">{s.value}</div>
+                <div className="text-gray-400 text-xs">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── ÉQUIPE ── */}
+      <section className="py-20 relative overflow-hidden" style={{background: 'linear-gradient(180deg, #F5F5F5 0%, #eef2ff 50%, #F5F5F5 100%)'}}>
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <svg className="absolute top-0 left-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="dots-equipe" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.5" fill="#1A1A2E" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots-equipe)" />
+          </svg>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#E8001C]/3 blur-3xl" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-14">
+            <h2 className="section-title">Notre Équipe</h2>
+            <p className="section-subtitle">
+              Des professionnels passionnés, engagés pour votre réussite en langue allemande.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {equipe.map(membre => (
+              <div key={membre.nom} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+                {/* Photo */}
+                <div className="relative h-64 bg-gradient-to-br from-[#1A1A2E] to-[#0F3460] overflow-hidden">
+                  {membre.photo ? (
+                    <Image src={membre.photo} alt={membre.nom} fill className="object-cover object-top group-hover:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#E8001C] to-[#5ECFCF] flex items-center justify-center">
+                        <GraduationCap size={40} className="text-white" />
+                      </div>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A2E]/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <span className="badge bg-[#E8001C] text-white text-xs">{membre.role}</span>
+                  </div>
+                </div>
+                {/* Infos */}
+                <div className="p-6">
+                  <h3 className="font-bold text-[#1A1A2E] text-lg mb-0.5">{membre.nom}</h3>
+                  <p className="text-[#5ECFCF] text-sm font-medium mb-3">{membre.titre}</p>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-5">{membre.bio}</p>
+                  {/* Réseaux sociaux */}
+                  <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                    {membre.linkedin && (
+                      <a href={membre.linkedin} target="_blank" rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-lg bg-[#0077B5]/10 flex items-center justify-center text-[#0077B5] hover:bg-[#0077B5] hover:text-white transition-colors">
+                        <IconLinkedin />
+                      </a>
+                    )}
+                    {membre.facebook && (
+                      <a href={membre.facebook} target="_blank" rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-lg bg-[#1877F2]/10 flex items-center justify-center text-[#1877F2] hover:bg-[#1877F2] hover:text-white transition-colors">
+                        <IconFacebook />
+                      </a>
+                    )}
+                    {membre.instagram && (
+                      <a href={membre.instagram} target="_blank" rel="noopener noreferrer"
+                        className="w-8 h-8 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-500 hover:bg-pink-500 hover:text-white transition-colors">
+                        <IconInstagram />
+                      </a>
+                    )}
+                    {membre.email && (
+                      <a href={`mailto:${membre.email}`}
+                        className="w-8 h-8 rounded-lg bg-[#E8001C]/10 flex items-center justify-center text-[#E8001C] hover:bg-[#E8001C] hover:text-white transition-colors">
+                        <Mail size={15} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── FORMATIONS ── */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[#E8001C]/20 to-transparent" />
+          <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#5ECFCF]/5 blur-3xl" />
+          <div className="absolute -left-32 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#E8001C]/4 blur-3xl" />
+        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="section-title">Nos cours d&apos;allemand</h2>
@@ -261,7 +496,17 @@ export default async function HomePage() {
       </section>
 
       {/* ── ANNONCES ── */}
-      <section className="py-20 bg-[#F5F5F5]">
+      <section className="py-20 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #F5F5F5 0%, #f8f4ff 50%, #F5F5F5 100%)'}}>
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <svg className="absolute top-0 left-0 w-full h-full opacity-[0.025]" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="dots-annonces" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="#1A1A2E" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#dots-annonces)" />
+          </svg>
+        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="section-title">Dernières annonces</h2>

@@ -130,6 +130,181 @@ async function main() {
     ],
   })
   console.log('✅ Annonces créées')
+
+  // ── Médias ──
+  await prisma.media.deleteMany()
+  await prisma.media.createMany({
+    data: [
+      // ── COURS ──
+      {
+        titre: 'Cours d\'allemand A1 — Salle principale',
+        description: 'Séance de cours pour les débutants A1, apprentissage de l\'alphabet et des salutations.',
+        url: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800',
+        type: 'PHOTO',
+        categorie: 'COURS',
+        publie: true,
+        ordre: 1,
+      },
+      {
+        titre: 'Exercices de prononciation en groupe',
+        description: 'Les apprenants pratiquent la prononciation allemande en petits groupes.',
+        url: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800',
+        type: 'PHOTO',
+        categorie: 'COURS',
+        publie: true,
+        ordre: 2,
+      },
+      {
+        titre: 'Tableau de grammaire allemande',
+        description: 'Révision des déclinaisons et des cas grammaticaux (Nominatif, Accusatif, Datif).',
+        url: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
+        type: 'PHOTO',
+        categorie: 'COURS',
+        publie: true,
+        ordre: 3,
+      },
+      {
+        titre: 'Introduction à l\'allemand — Leçon 1',
+        description: 'Vidéo de présentation du cours A1 par M. Boris Kouamen.',
+        url: 'https://www.youtube.com/watch?v=iBt9V5BjnGU',
+        type: 'VIDEO',
+        categorie: 'COURS',
+        publie: true,
+        ordre: 4,
+      },
+      // ── ÉVÉNEMENTS ──
+      {
+        titre: 'Journée Portes Ouvertes — Juin 2025',
+        description: 'Accueil des visiteurs lors de la journée portes ouvertes de Visum Akademie à Bangangté.',
+        url: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800',
+        type: 'PHOTO',
+        categorie: 'EVENEMENT',
+        publie: true,
+        ordre: 5,
+      },
+      {
+        titre: 'Cérémonie de remise des attestations',
+        description: 'Remise des attestations de fin de formation aux apprenants de la session de mars 2025.',
+        url: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800',
+        type: 'PHOTO',
+        categorie: 'EVENEMENT',
+        publie: true,
+        ordre: 6,
+      },
+      {
+        titre: 'Atelier culturel — Fête de la Saint-Nicolas',
+        description: 'Découverte des traditions allemandes lors d\'un atelier culturel animé par nos formateurs.',
+        url: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800',
+        type: 'PHOTO',
+        categorie: 'EVENEMENT',
+        publie: true,
+        ordre: 7,
+      },
+      // ── EXAMENS ──
+      {
+        titre: 'Session d\'examen Goethe-Zertifikat B1',
+        description: 'Nos apprenants passent l\'examen officiel Goethe-Zertifikat B1 — session d\'avril 2025.',
+        url: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800',
+        type: 'PHOTO',
+        categorie: 'EXAMENS',
+        publie: true,
+        ordre: 8,
+      },
+      {
+        titre: 'Résultats Goethe B1 — 94% de réussite',
+        description: 'Célébration des résultats exceptionnels de la session Goethe B1 d\'avril 2025.',
+        url: 'https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=800',
+        type: 'PHOTO',
+        categorie: 'EXAMENS',
+        publie: true,
+        ordre: 9,
+      },
+      {
+        titre: 'Préparation à l\'examen TELC Deutsch B2',
+        description: 'Simulation d\'examen TELC B2 — entraînement à la compréhension écrite et orale.',
+        url: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800',
+        type: 'PHOTO',
+        categorie: 'EXAMENS',
+        publie: true,
+        ordre: 10,
+      },
+      // ── VIE CAMPUS ──
+      {
+        titre: 'Salle de cours Visum Akademie',
+        description: 'Notre salle principale équipée pour accueillir jusqu\'à 12 apprenants dans les meilleures conditions.',
+        url: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800',
+        type: 'PHOTO',
+        categorie: 'VIE_CAMPUS',
+        publie: true,
+        ordre: 11,
+      },
+      {
+        titre: 'Espace détente et bibliothèque',
+        description: 'Notre bibliothèque avec des ouvrages en allemand, des dictionnaires et des supports pédagogiques.',
+        url: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800',
+        type: 'PHOTO',
+        categorie: 'VIE_CAMPUS',
+        publie: true,
+        ordre: 12,
+      },
+      {
+        titre: 'Pause entre les cours',
+        description: 'Moment de convivialité entre apprenants dans la cour de Visum Akademie, Bangangté.',
+        url: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800',
+        type: 'PHOTO',
+        categorie: 'VIE_CAMPUS',
+        publie: true,
+        ordre: 13,
+      },
+      {
+        titre: 'Visite de Visum+ Akademie',
+        description: 'Présentation de nos locaux et de notre environnement d\'apprentissage à Bangangté.',
+        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        type: 'VIDEO',
+        categorie: 'VIE_CAMPUS',
+        publie: true,
+        ordre: 14,
+      },
+      // ── VIE EN ALLEMAGNE ──
+      {
+        titre: 'Berlin — Porte de Brandebourg',
+        description: 'Nos anciens apprenants en Ausbildung découvrent les monuments emblématiques de Berlin.',
+        url: 'https://images.unsplash.com/photo-1560969184-10fe8719e047?w=800',
+        type: 'PHOTO',
+        categorie: 'ALLEMAGNE',
+        publie: true,
+        ordre: 15,
+      },
+      {
+        titre: 'Intégration en entreprise allemande',
+        description: 'Jean-Paul, ancien apprenant B2, lors de son premier jour en Ausbildung dans une clinique à Munich.',
+        url: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800',
+        type: 'PHOTO',
+        categorie: 'ALLEMAGNE',
+        publie: true,
+        ordre: 16,
+      },
+      {
+        titre: 'Marché de Noël à Cologne',
+        description: 'Découverte de la culture allemande lors du célèbre marché de Noël de Cologne.',
+        url: 'https://images.unsplash.com/photo-1467810563316-b5476525c0f9?w=800',
+        type: 'PHOTO',
+        categorie: 'ALLEMAGNE',
+        publie: true,
+        ordre: 17,
+      },
+      {
+        titre: 'Témoignage — Ausbildung en Allemagne',
+        description: 'Marie, ancienne apprenante C1, témoigne de son parcours Ausbildung en soins infirmiers à Hambourg.',
+        url: 'https://www.youtube.com/watch?v=LXb3EKWsInQ',
+        type: 'VIDEO',
+        categorie: 'ALLEMAGNE',
+        publie: true,
+        ordre: 18,
+      },
+    ],
+  })
+  console.log('✅ Médias créés (18 entrées)')
 }
 
 main()
