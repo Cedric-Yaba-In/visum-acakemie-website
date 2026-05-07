@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import { BookOpen, Clock, User } from 'lucide-react'
 import type { Metadata } from 'next'
+import Reveal from '@/components/Reveal'
 
 export const metadata: Metadata = { title: 'Formations' }
 
@@ -62,8 +63,8 @@ export default async function FormationsPage({ searchParams }: { searchParams: {
             </div>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {formations.map(f => (
-                <Link href={`/formations/${f.slug}`} key={f.id} className="card group">
+              {formations.map((f, i) => (
+                <Reveal key={f.id} animation="fade-up" delay={i * 80} as={Link} href={`/formations/${f.slug}`} className="card group">
                   <div className="h-44 bg-gradient-to-br from-[#1A1A2E] to-[#E8001C] flex items-center justify-center">
                     <BookOpen size={48} className="text-white/80" />
                   </div>
@@ -80,7 +81,7 @@ export default async function FormationsPage({ searchParams }: { searchParams: {
                       <div className="font-bold text-[#E8001C]">{f.prix.toLocaleString('fr-FR')} FCFA</div>
                     </div>
                   </div>
-                </Link>
+                </Reveal>
               ))}
             </div>
           )}

@@ -1,7 +1,8 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
-import { X, Play, Image as ImageIcon, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react'
-import type { Metadata } from 'next'
+import { X, Image as ImageIcon, ChevronLeft, ChevronRight, ZoomIn, Camera, Video, BookOpen, CalendarDays, Trophy, Building2, Plane, LayoutGrid, FolderOpen } from 'lucide-react'
+import React from 'react'
+import Reveal from '@/components/Reveal'
 
 type Media = {
   id: string
@@ -12,14 +13,14 @@ type Media = {
   categorie: string
 }
 
-const categories = [
-  { value: '', label: 'Tout voir' },
-  { value: 'COURS', label: '📚 Cours' },
-  { value: 'EVENEMENT', label: '🎉 Événements' },
-  { value: 'EXAMENS', label: '🏆 Examens & Résultats' },
-  { value: 'VIE_CAMPUS', label: '🏫 Vie au campus' },
-  { value: 'ALLEMAGNE', label: '🇩🇪 Vie en Allemagne' },
-  { value: 'AUTRE', label: '📷 Autre' },
+const categories: { value: string; label: string; icon: React.ReactNode }[] = [
+  { value: '', label: 'Tout voir', icon: <LayoutGrid size={14} /> },
+  { value: 'COURS', label: 'Cours', icon: <BookOpen size={14} /> },
+  { value: 'EVENEMENT', label: 'Événements', icon: <CalendarDays size={14} /> },
+  { value: 'EXAMENS', label: 'Examens & Résultats', icon: <Trophy size={14} /> },
+  { value: 'VIE_CAMPUS', label: 'Vie au campus', icon: <Building2 size={14} /> },
+  { value: 'ALLEMAGNE', label: 'Vie en Allemagne', icon: <Plane size={14} /> },
+  { value: 'AUTRE', label: 'Autre', icon: <FolderOpen size={14} /> },
 ]
 
 function getYoutubeId(url: string) {
@@ -89,10 +90,11 @@ export default function GaleriePage() {
         <div className="flex flex-wrap gap-3 mb-4">
           {categories.map(c => (
             <button key={c.value} onClick={() => setFiltre(c.value)}
-              className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition-colors
                 ${filtre === c.value
                   ? 'bg-[#E8001C] text-white border-[#E8001C]'
                   : 'bg-white text-gray-600 border-gray-300 hover:border-[#E8001C] hover:text-[#E8001C]'}`}>
+              {c.icon}
               {c.label}
             </button>
           ))}
@@ -101,15 +103,16 @@ export default function GaleriePage() {
         {/* FILTRE TYPE */}
         <div className="flex gap-3 mb-10">
           {[
-            { value: '', label: '🔀 Tous', icon: null },
-            { value: 'PHOTO', label: '📷 Photos', icon: ImageIcon },
-            { value: 'VIDEO', label: '▶️ Vidéos', icon: Play },
+            { value: '', label: 'Tous les médias', icon: <LayoutGrid size={15} /> },
+            { value: 'PHOTO', label: 'Photos', icon: <Camera size={15} /> },
+            { value: 'VIDEO', label: 'Vidéos', icon: <Video size={15} /> },
           ].map(t => (
             <button key={t.value} onClick={() => setTypeFiltre(t.value)}
-              className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors border
                 ${typeFiltre === t.value
-                  ? 'bg-[#1A1A2E] text-white'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                  ? 'bg-[#1A1A2E] text-white border-[#1A1A2E]'
+                  : 'bg-white text-gray-600 border-gray-200 hover:border-[#1A1A2E] hover:text-[#1A1A2E]'}`}>
+              {t.icon}
               {t.label}
             </button>
           ))}
@@ -130,35 +133,33 @@ export default function GaleriePage() {
             {(typeFiltre === '' || typeFiltre === 'PHOTO') && photos.length > 0 && (
               <div className="mb-14">
                 {typeFiltre === '' && (
+                  <Reveal animation="fade-up">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-1 h-6 bg-[#E8001C] rounded-full" />
                     <h2 className="text-xl font-bold text-[#1A1A2E]">Photos ({photos.length})</h2>
                   </div>
+                  </Reveal>
                 )}
                 <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
                   {photos.map((m, idx) => (
-                    <div key={m.id}
+                    <Reveal key={m.id} animation="zoom" delay={idx * 40}>
+                    <div
                       className="break-inside-avoid group relative cursor-pointer rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow"
                       onClick={() => setLightbox(lightboxItems.findIndex(li => li.id === m.id))}>
-                      <img
-                        src={m.url}
-                        alt={m.titre}
-                        className="w-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        loading="lazy"
-                      />
+                      <img src={m.url} alt={m.titre} className="w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                         <div className="absolute bottom-0 left-0 right-0 p-4">
                           <p className="text-white font-semibold text-sm">{m.titre}</p>
                           {m.description && <p className="text-gray-300 text-xs mt-1 line-clamp-2">{m.description}</p>}
                         </div>
-                        <div className="absolute top-3 right-3">
-                          <ZoomIn size={20} className="text-white" />
-                        </div>
+                        <div className="absolute top-3 right-3"><ZoomIn size={20} className="text-white" /></div>
                       </div>
-                      <span className="absolute top-3 left-3 badge bg-[#E8001C]/80 text-white text-xs backdrop-blur-sm">
-                        {categories.find(c => c.value === m.categorie)?.label.split(' ').slice(1).join(' ') || m.categorie}
+                      <span className="absolute top-3 left-3 flex items-center gap-1 bg-[#E8001C]/80 text-white text-xs backdrop-blur-sm px-2 py-1 rounded-full">
+                        {categories.find(c => c.value === m.categorie)?.icon}
+                        {categories.find(c => c.value === m.categorie)?.label || m.categorie}
                       </span>
                     </div>
+                    </Reveal>
                   ))}
                 </div>
               </div>
@@ -168,17 +169,19 @@ export default function GaleriePage() {
             {(typeFiltre === '' || typeFiltre === 'VIDEO') && videos.length > 0 && (
               <div>
                 {typeFiltre === '' && (
+                  <Reveal animation="fade-up">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-1 h-6 bg-[#5ECFCF] rounded-full" />
                     <h2 className="text-xl font-bold text-[#1A1A2E]">Vidéos ({videos.length})</h2>
                   </div>
+                  </Reveal>
                 )}
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {videos.map(m => {
-                    const ytThumb = isYoutube(m.url) ? getYoutubeThumbnail(m.url) : null
+                  {videos.map((m, idx) => {
                     const ytId = isYoutube(m.url) ? getYoutubeId(m.url) : null
                     return (
-                      <div key={m.id} className="card group overflow-hidden">
+                      <Reveal key={m.id} animation="fade-up" delay={idx * 80}>
+                      <div className="card group overflow-hidden">
                         <div className="relative aspect-video bg-[#1A1A2E]">
                           {ytId ? (
                             <iframe
@@ -193,21 +196,23 @@ export default function GaleriePage() {
                               src={m.url}
                               controls
                               className="w-full h-full object-cover"
-                              poster={ytThumb || undefined}
+                              poster={getYoutubeThumbnail(m.url) || undefined}
                             />
                           )}
-                          <span className="absolute top-2 left-2 badge bg-[#5ECFCF]/90 text-[#1A1A2E] text-xs font-bold backdrop-blur-sm">
-                            ▶ Vidéo
+                          <span className="absolute top-2 left-2 badge bg-[#5ECFCF]/90 text-[#1A1A2E] text-xs font-bold backdrop-blur-sm flex items-center gap-1">
+                            <Video size={11} /> Vidéo
                           </span>
                         </div>
                         <div className="p-4">
-                          <span className="badge bg-[#E8001C]/10 text-[#E8001C] text-xs mb-2 inline-block">
-                            {categories.find(c => c.value === m.categorie)?.label.split(' ').slice(1).join(' ') || m.categorie}
+                          <span className="flex items-center gap-1 bg-[#E8001C]/10 text-[#E8001C] text-xs mb-2 inline-flex w-fit px-2 py-1 rounded-full">
+                            {categories.find(c => c.value === m.categorie)?.icon}
+                            {categories.find(c => c.value === m.categorie)?.label || m.categorie}
                           </span>
                           <h3 className="font-bold text-[#1A1A2E] mb-1">{m.titre}</h3>
                           {m.description && <p className="text-gray-500 text-sm line-clamp-2">{m.description}</p>}
                         </div>
                       </div>
+                      </Reveal>
                     )
                   })}
                 </div>

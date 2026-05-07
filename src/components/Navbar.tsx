@@ -6,13 +6,13 @@ import { Menu, X } from 'lucide-react'
 
 const links = [
   { href: '/', label: 'Accueil' },
-  { href: '/formations-professionnelles', label: 'Ausbildung 🇩🇪' },
+  { href: '/formations-professionnelles', label: 'Ausbildung' },
   { href: '/formations', label: 'Formations' },
   { href: '/niveaux', label: 'Niveaux' },
   { href: '/galerie', label: 'Galerie' },
   { href: '/annonces', label: 'Annonces' },
   { href: '/contact', label: 'Contact' },
-  { href: '/recruteurs', label: 'Recruteurs 🇩🇪' },
+  { href: '/recruteurs', label: 'Recruteurs' },
 ]
 
 export default function Navbar() {
@@ -21,7 +21,7 @@ export default function Navbar() {
 
   function isActive(href: string) {
     if (href === '/') return pathname === '/'
-    return pathname.startsWith(href)
+    return pathname == href
   }
 
   return (

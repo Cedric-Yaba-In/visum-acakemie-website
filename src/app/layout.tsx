@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: { default: 'Visum Akademie', template: '%s | Visum Akademie' },
+  title: { default: 'Visum+ Akademie', template: '%s | Visum Akademie' },
   description: 'Centre de formation allemand — tous niveaux, toutes disciplines.',
   keywords: ['formation', 'allemand', 'cours', 'certification', 'Visum Akademie'],
 }

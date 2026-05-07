@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
 import { Calendar, Tag, Bell } from 'lucide-react'
 import type { Metadata } from 'next'
+import Reveal from '@/components/Reveal'
 
 export const metadata: Metadata = { title: 'Annonces' }
 
@@ -34,6 +35,7 @@ export default async function AnnoncesPage({ searchParams }: { searchParams: { c
       </section>
 
       <section className="py-10 max-w-7xl mx-auto px-4">
+        <Reveal animation="fade-up">
         <div className="flex flex-wrap gap-3 mb-10">
           <Link href="/annonces" className={`badge px-4 py-2 text-sm font-medium rounded-full border transition-colors ${!categorie ? 'bg-[#E8001C] text-white border-[#E8001C]' : 'bg-white text-gray-600 border-gray-300 hover:border-[#E8001C]'}`}>
             Toutes
@@ -44,6 +46,7 @@ export default async function AnnoncesPage({ searchParams }: { searchParams: { c
             </Link>
           ))}
         </div>
+        </Reveal>
 
         {annonces.length === 0 ? (
           <div className="text-center py-20 text-gray-400">
@@ -52,8 +55,8 @@ export default async function AnnoncesPage({ searchParams }: { searchParams: { c
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {annonces.map(a => (
-              <Link href={`/annonces/${a.slug}`} key={a.id} className="card group p-6">
+            {annonces.map((a, i) => (
+              <Reveal key={a.id} animation="fade-up" delay={i * 80} as={Link} href={`/annonces/${a.slug}`} className="card group p-6">
                 <div className="flex items-center gap-2 mb-3">
                   <span className={`badge ${categorieColors[a.categorie] || 'bg-gray-100 text-gray-700'}`}>
                     <Tag size={10} className="inline mr-1" />{a.categorie}
@@ -65,7 +68,7 @@ export default async function AnnoncesPage({ searchParams }: { searchParams: { c
                   <Calendar size={12} />
                   <span>{new Date(a.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                 </div>
-              </Link>
+              </Reveal>
             ))}
           </div>
         )}

@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { prisma } from '@/lib/prisma'
-import { BookOpen, Users, Award, TrendingUp, ArrowRight, Calendar, Tag, Quote, CheckCircle, Globe, GraduationCap, Mic, PenLine, Target, Eye, Heart, Mail } from 'lucide-react'
+import { BookOpen, Users, Award, TrendingUp, ArrowRight, Calendar, Tag, Quote, CheckCircle, Globe, GraduationCap, Mic, PenLine, Target, Eye, Heart, Mail, FileText, Headphones } from 'lucide-react'
+import Reveal from '@/components/Reveal'
+import CountUp from '@/components/CountUp'
 
 function IconLinkedin() {
   return (
@@ -48,10 +50,10 @@ const niveaux = [
 ]
 
 const competences = [
-  { icon: Mic, label: 'Expression orale', desc: 'Conversations, présentations, débats en allemand' },
-  { icon: PenLine, label: 'Expression écrite', desc: 'Rédaction, correspondance, rapports professionnels' },
-  { icon: BookOpen, label: 'Compréhension', desc: 'Lecture et écoute de documents authentiques' },
-  { icon: Globe, label: 'Culture & Civilisation', desc: 'Histoire, culture et société des pays germanophones' },
+  { icon: Mic,         label: 'Expression orale',    labelDE: 'Mündlicher Ausdruck',   desc: 'Conversations, présentations et débats en allemand' },
+  { icon: PenLine,     label: 'Expression écrite',    labelDE: 'Schriftlicher Ausdruck', desc: 'Rédaction, correspondance et rapports professionnels' },
+  { icon: FileText,    label: 'Compréhension écrite', labelDE: 'Leseverstehen',          desc: 'Lecture et analyse de documents authentiques en allemand' },
+  { icon: Headphones,  label: 'Compréhension orale',  labelDE: 'Hörverstehen',           desc: 'Écoute et compréhension de documents audio et vidéo' },
 ]
 
 const raisons = [
@@ -128,9 +130,6 @@ export default async function HomePage() {
       <section className="bg-gradient-to-br from-[#1A1A2E] via-[#16213E] to-[#0F3460] text-white py-24 px-4">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            {/* <span className="badge bg-[#E8001C]/20 text-[#ff6b6b] mb-4 inline-block">
-              🇩🇪 Centre de langue allemande certifié
-            </span> */}
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
               Apprenez l&apos;allemand avec <span className="text-[#5ECFCF]">Visum+Akademie</span>
             </h1>
@@ -141,11 +140,6 @@ export default async function HomePage() {
               <Link href="/formations" className="btn-primary">Offre de formations</Link>
               <Link href="/formations-professionnelles" className="btn-outline-white">Formations en Allemagne</Link>
             </div>
-            {/* <div className="flex items-center gap-6 mt-8 pt-8 border-t border-white/10 text-sm text-gray-400">
-              <span>🏆 Partenaire Goethe-Institut</span>
-              <span>✅ Certifié TELC</span>
-              <span>🎓 Accrédité ÖSD</span>
-            </div> */}
           </div>
           <div className="hidden md:flex justify-center">
             <Image src="/logo-nobg.png" alt="Visum Akademie" width={400} height={280} className="object-contain drop-shadow-2xl" />
@@ -160,14 +154,16 @@ export default async function HomePage() {
           <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-[#5ECFCF]/4" />
         </div>
         <div className="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map(({ icon: Icon, value, label }) => (
-            <div key={label} className="text-center">
-              <div className="inline-flex items-center justify-center w-14 h-14 bg-[#E8001C]/10 rounded-full mb-3">
-                <Icon size={24} className="text-[#E8001C]" />
+          {stats.map(({ icon: Icon, value, label }, i) => (
+            <Reveal key={label} animation="fade-up" delay={i * 100}>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-[#E8001C]/10 rounded-full mb-3">
+                  <Icon size={24} className="text-[#E8001C]" />
+                </div>
+                <div className="text-3xl font-bold text-[#1A1A2E]"><CountUp value={value.trim()} /></div>
+                <div className="text-gray-500 text-sm mt-1">{label}</div>
               </div>
-              <div className="text-3xl font-bold text-[#1A1A2E]">{value}</div>
-              <div className="text-gray-500 text-sm mt-1">{label}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -175,23 +171,25 @@ export default async function HomePage() {
       {/* ── NIVEAUX CECR ── */}
       <section className="py-20 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #f0f4ff 0%, #F5F5F5 50%, #fff5f5 100%)'}}>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="section-title">Tous les niveaux d'apprentissage</h2>
-            <p className="section-subtitle">
-              Du grand débutant au bilingue, Visum Akademie propose un parcours complet conforme au Cadre Européen Commun de Référence pour les langues.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          <Reveal animation="fade-up">
+            <div className="text-center mb-12">
+              <h2 className="section-title">Tous les niveaux d'apprentissage</h2>
+              <p className="section-subtitle">
+                Du grand débutant au bilingue, Visum Akademie propose un parcours complet conforme au Cadre Européen Commun de Référence pour les langues.
+              </p>
+            </div>
+          </Reveal>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 justify-items-center">
             {niveaux.map((n, i) => {
-              const colors = ['bg-green-500', 'bg-teal-500', 'bg-blue-500', 'bg-orange-500', 'bg-red-500', 'bg-[#1A1A2E]']
+              const colors = ['bg-green-500', 'bg-teal-500', 'bg-blue-500', 'bg-orange-500', 'bg-red-500']
               return (
-                <Link href="/formations" key={n.code} className="card p-5 text-center group hover:scale-105 transition-transform">
+                <Reveal key={n.code} animation="zoom" delay={i * 80} as={Link} href="/formations" className="card p-5 text-center group hover:scale-105 transition-transform w-full">
                   <div className={`${colors[i]} text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-sm mx-auto mb-3`}>
                     {n.code}
                   </div>
                   <div className="font-bold text-[#1A1A2E] text-sm mb-1">{n.label}</div>
                   <div className="text-gray-400 text-xs">{n.desc}</div>
-                </Link>
+                </Reveal>
               )
             })}
           </div>
@@ -212,19 +210,22 @@ export default async function HomePage() {
           <div className="absolute top-10 right-10 w-72 h-72 rounded-full bg-[#5ECFCF]/5 blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="section-title">4 compétences, une langue maîtrisée</h2>
-            <p className="section-subtitle">Notre approche pédagogique couvre toutes les dimensions de la langue allemande.</p>
-          </div>
+          <Reveal animation="fade-up">
+            <div className="text-center mb-12">
+              <h2 className="section-title">4 compétences, une langue maîtrisée</h2>
+              <p className="section-subtitle">Notre approche pédagogique couvre toutes les dimensions de la langue allemande.</p>
+            </div>
+          </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {competences.map(({ icon: Icon, label, desc }) => (
-              <div key={label} className="border border-gray-100 rounded-xl p-6 hover:border-[#E8001C] hover:shadow-md transition-all group">
+            {competences.map(({ icon: Icon, label, labelDE, desc }, i) => (
+              <Reveal key={label} animation="fade-up" delay={i * 100} className="border border-gray-100 rounded-xl p-6 hover:border-[#E8001C] hover:shadow-md transition-all group">
                 <div className="w-12 h-12 bg-[#E8001C]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#E8001C] transition-colors">
                   <Icon size={22} className="text-[#E8001C] group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="font-bold text-[#1A1A2E] mb-2">{label}</h3>
+                <h3 className="font-bold text-[#1A1A2E] mb-1">{label}</h3>
+                <p className="text-[#5ECFCF] text-xs font-semibold mb-3 tracking-wide">{labelDE}</p>
                 <p className="text-gray-500 text-sm">{desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -234,27 +235,26 @@ export default async function HomePage() {
       <section className="py-20 bg-[#1A1A2E] text-white">
         <div className="max-w-5xl mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-10 items-center">
-            <div className="md:col-span-1 flex flex-col items-center text-center">
+            <Reveal animation="fade-right" className="md:col-span-1 flex flex-col items-center text-center">
               <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#E8001C] to-[#5ECFCF] flex items-center justify-center mb-4">
                 <GraduationCap size={52} className="text-white" />
               </div>
-              <div className="font-bold text-lg text-white"> Boris Kouamen Nwandji</div>
+              <div className="font-bold text-lg text-white">Boris Kouamen Nwandji</div>
               <div className="text-[#5ECFCF] text-sm mt-1">Co-Fondateur & CEO</div>
-              {/* <div className="text-gray-400 text-xs mt-1">Docteur en Linguistique Germanique</div> */}
-            </div>
-            <div className="md:col-span-2">
+            </Reveal>
+            <Reveal animation="fade-left" delay={150} className="md:col-span-2">
               <Quote size={40} className="text-[#E8001C] mb-4 opacity-60" />
               <p className="text-gray-300 text-lg leading-relaxed mb-4 italic">
-                &ldquo;Chez Visum+ Akademie, nous croyons que l&apos;apprentissage de l&apos;allemand est bien plus qu&apos;une compétence linguistique — c&apos;est une ouverture sur une culture riche, une économie dynamique et des opportunités professionnelles exceptionnelles.
+                &ldquo;Chez Visum+ Akademie, nous croyons que l&apos;apprentissage de l&apos;allemand est bien plus qu&apos;une comp&eacute;tence linguistique &mdash; c&apos;est une ouverture sur une culture riche, une &eacute;conomie dynamique et des opportunit&eacute;s professionnelles exceptionnelles.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 italic">
-                Notre mission est de vous offrir un enseignement rigoureux, vivant et adapté à vos objectifs, qu&apos;il s&apos;agisse de voyager, de travailler ou de vous certifier. Chaque apprenant est unique, et nous nous engageons à l&apos;accompagner jusqu&apos;à la réussite.&rdquo;
+                Notre mission est de vous offrir un enseignement rigoureux, vivant et adapt&eacute; &agrave; vos objectifs, qu&apos;il s&apos;agisse de voyager, de travailler ou de vous certifier. Chaque apprenant est unique, et nous nous engageons &agrave; l&apos;accompagner jusqu&apos;&agrave; la r&eacute;ussite.&rdquo;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-0.5 bg-[#E8001C]" />
                 <span className="text-[#5ECFCF] font-semibold text-sm">Willkommen bei Visum+ Akademie !</span>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -266,10 +266,10 @@ export default async function HomePage() {
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#5ECFCF]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
         </div>
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <Reveal animation="fade-right">
             <h2 className="section-title">Pourquoi choisir Visum+ Akademie ?</h2>
             <p className="text-gray-500 mb-8">
-              Nous ne nous contentons pas d&apos;enseigner l&apos;allemand — nous vous préparons à l&apos;utiliser dans la vraie vie, avec confiance et efficacité.
+              Nous ne nous contentons pas d&apos;enseigner l&apos;allemand &mdash; nous vous pr&eacute;parons &agrave; l&apos;utiliser dans la vraie vie, avec confiance et efficacit&eacute;.
             </p>
             <ul className="space-y-3">
               {raisons.map(r => (
@@ -280,9 +280,10 @@ export default async function HomePage() {
               ))}
             </ul>
             <Link href="/galerie" className="btn-primary inline-flex items-center gap-2 mt-8">
-              Découvrir notre centre <ArrowRight size={16} />
+              D&eacute;couvrir notre centre <ArrowRight size={16} />
             </Link>
-          </div>
+          </Reveal>
+          <Reveal animation="fade-left" delay={150}>
           <div className="bg-[#1A1A2E] rounded-2xl p-8 text-white">
             <h3 className="text-xl font-bold mb-6 text-[#5ECFCF]">Certifications préparées</h3>
             <div className="space-y-4">
@@ -302,6 +303,7 @@ export default async function HomePage() {
               ))}
             </div>
           </div>
+          </Reveal>
         </div>
       </section>
 
@@ -320,12 +322,14 @@ export default async function HomePage() {
           <div className="absolute -bottom-20 -right-20 w-96 h-96 rounded-full bg-[#5ECFCF]/5 blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
-            <h2 className="section-title">Notre Vision</h2>
-            <p className="section-subtitle">
-              Ce qui nous anime chaque jour et guide chacune de nos décisions pédagogiques.
-            </p>
-          </div>
+          <Reveal animation="fade-up">
+            <div className="text-center mb-14">
+              <h2 className="section-title">Notre Vision</h2>
+              <p className="section-subtitle">
+                Ce qui nous anime chaque jour et guide chacune de nos d&eacute;cisions p&eacute;dagogiques.
+              </p>
+            </div>
+          </Reveal>
           <div className="grid md:grid-cols-3 gap-8 mb-14">
             {[
               {
@@ -346,19 +350,19 @@ export default async function HomePage() {
                 couleur: 'bg-[#5ECFCF]',
                 texte: 'Excellence pédagogique, bienveillance envers chaque apprenant, rigueur dans l\'enseignement, ouverture culturelle et engagement total pour la réussite de chacun.',
               },
-            ].map(({ icon: Icon, titre, couleur, texte }) => (
-              <div key={titre} className="relative bg-[#F5F5F5] rounded-2xl p-8 hover:shadow-lg transition-shadow">
+            ].map(({ icon: Icon, titre, couleur, texte }, i) => (
+              <Reveal key={titre} animation="fade-up" delay={i * 120} className="relative bg-[#F5F5F5] rounded-2xl p-8 hover:shadow-lg transition-shadow">
                 <div className={`${couleur} w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-md`}>
                   <Icon size={26} className="text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-[#1A1A2E] mb-3">{titre}</h3>
                 <p className="text-gray-500 leading-relaxed text-sm">{texte}</p>
                 <div className={`absolute bottom-0 left-8 right-8 h-0.5 ${couleur} rounded-full opacity-30`} />
-              </div>
+              </Reveal>
             ))}
           </div>
 
-          {/* Ligne de valeurs chiffrées */}
+          <Reveal animation="fade-up" delay={100}>
           <div className="bg-gradient-to-r from-[#1A1A2E] to-[#0F3460] rounded-2xl p-8 grid grid-cols-2 md:grid-cols-3 gap-6 text-white text-center">
             {[
               { value: '2022', label: 'Année de fondation' },
@@ -371,6 +375,7 @@ export default async function HomePage() {
               </div>
             ))}
           </div>
+          </Reveal>
         </div>
       </section>
 
@@ -388,15 +393,17 @@ export default async function HomePage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#E8001C]/3 blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-14">
-            <h2 className="section-title">Notre Équipe</h2>
-            <p className="section-subtitle">
-              Des professionnels passionnés, engagés pour votre réussite en langue allemande.
-            </p>
-          </div>
+          <Reveal animation="fade-up">
+            <div className="text-center mb-14">
+              <h2 className="section-title">Notre &Eacute;quipe</h2>
+              <p className="section-subtitle">
+                Des professionnels passionn&eacute;s, engag&eacute;s pour votre r&eacute;ussite en langue allemande.
+              </p>
+            </div>
+          </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {equipe.map(membre => (
-              <div key={membre.nom} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
+            {equipe.map((membre, i) => (
+              <Reveal key={membre.nom} animation="fade-up" delay={i * 120} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
                 {/* Photo */}
                 <div className="relative h-64 bg-gradient-to-br from-[#1A1A2E] to-[#0F3460] overflow-hidden">
                   {membre.photo ? (
@@ -446,7 +453,7 @@ export default async function HomePage() {
                     )}
                   </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -460,16 +467,18 @@ export default async function HomePage() {
           <div className="absolute -left-32 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#E8001C]/4 blur-3xl" />
         </div>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="section-title">Nos cours d&apos;allemand</h2>
-            <p className="section-subtitle">Des cours structurés pour chaque niveau, animés par des formateurs natifs et certifiés.</p>
-          </div>
+          <Reveal animation="fade-up">
+            <div className="text-center mb-12">
+              <h2 className="section-title">Nos cours d&apos;allemand</h2>
+              <p className="section-subtitle">Des cours structur&eacute;s pour chaque niveau, anim&eacute;s par des formateurs natifs et certifi&eacute;s.</p>
+            </div>
+          </Reveal>
           {formations.length === 0 ? (
             <p className="text-center text-gray-400">Aucun cours disponible pour le moment.</p>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {formations.map(f => (
-                <Link href={`/formations/${f.slug}`} key={f.id} className="card group">
+              {formations.map((f, i) => (
+                <Reveal key={f.id} animation="fade-up" delay={i * 80} as={Link} href={`/formations/${f.slug}`} className="card group">
                   <div className="h-40 bg-gradient-to-br from-[#E8001C] to-[#5ECFCF] flex items-center justify-center relative overflow-hidden">
                     <span className="text-white/20 text-7xl font-black absolute -right-2 -bottom-2 select-none">DE</span>
                     <BookOpen size={40} className="text-white relative z-10" />
@@ -483,15 +492,17 @@ export default async function HomePage() {
                       <span className="text-gray-400 text-xs">{f.duree}</span>
                     </div>
                   </div>
-                </Link>
+                </Reveal>
               ))}
             </div>
           )}
+          <Reveal animation="fade-up" delay={100}>
           <div className="text-center mt-10">
             <Link href="/formations" className="btn-secondary inline-flex items-center gap-2">
               Tous les cours <ArrowRight size={16} />
             </Link>
           </div>
+          </Reveal>
         </div>
       </section>
 
@@ -508,16 +519,18 @@ export default async function HomePage() {
           </svg>
         </div>
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="section-title">Dernières annonces</h2>
-            <p className="section-subtitle">Actualités, événements, résultats d&apos;examens et offres spéciales de Visum Akademie.</p>
-          </div>
+          <Reveal animation="fade-up">
+            <div className="text-center mb-12">
+              <h2 className="section-title">Derni&egrave;res annonces</h2>
+              <p className="section-subtitle">Actualit&eacute;s, &eacute;v&eacute;nements, r&eacute;sultats d&apos;examens et offres sp&eacute;ciales de Visum Akademie.</p>
+            </div>
+          </Reveal>
           {annonces.length === 0 ? (
             <p className="text-center text-gray-400">Aucune annonce pour le moment.</p>
           ) : (
             <div className="grid md:grid-cols-3 gap-6">
-              {annonces.map(a => (
-                <Link href={`/annonces/${a.slug}`} key={a.id} className="card group p-6">
+              {annonces.map((a, i) => (
+                <Reveal key={a.id} animation="fade-up" delay={i * 100} as={Link} href={`/annonces/${a.slug}`} className="card group p-6">
                   <div className="flex items-center gap-2 mb-3">
                     <span className={`badge ${categorieColors[a.categorie] || 'bg-gray-100 text-gray-700'}`}>
                       <Tag size={10} className="inline mr-1" />{a.categorie}
@@ -529,28 +542,32 @@ export default async function HomePage() {
                     <Calendar size={12} />
                     <span>{new Date(a.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
                   </div>
-                </Link>
+                </Reveal>
               ))}
             </div>
           )}
+          <Reveal animation="fade-up" delay={100}>
           <div className="text-center mt-10">
             <Link href="/annonces" className="btn-secondary inline-flex items-center gap-2">
               Toutes les annonces <ArrowRight size={16} />
             </Link>
           </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── TÉMOIGNAGES ── */}
       <section className="py-20 bg-[#1A1A2E] text-white">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Ce que disent nos apprenants</h2>
-            <p className="text-gray-400 text-lg">Des témoignages authentiques de notre communauté germanophone.</p>
-          </div>
+          <Reveal animation="fade-up">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Ce que disent nos apprenants</h2>
+              <p className="text-gray-400 text-lg">Des t&eacute;moignages authentiques de notre communaut&eacute; germanophone.</p>
+            </div>
+          </Reveal>
           <div className="grid md:grid-cols-3 gap-6">
-            {temoignages.map(t => (
-              <div key={t.nom} className="bg-white/5 border border-white/10 rounded-xl p-6">
+            {temoignages.map((t, i) => (
+              <Reveal key={t.nom} animation="fade-up" delay={i * 120} className="bg-white/5 border border-white/10 rounded-xl p-6">
                 <Quote size={24} className="text-[#E8001C] mb-3 opacity-60" />
                 <p className="text-gray-300 mb-5 italic leading-relaxed">{t.texte}</p>
                 <div className="flex items-center justify-between">
@@ -560,7 +577,7 @@ export default async function HomePage() {
                   </div>
                   <span className="text-2xl">🇩🇪</span>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -569,6 +586,7 @@ export default async function HomePage() {
       {/* ── CTA FINAL ── */}
       <section className="py-20 bg-[#E8001C] text-white text-center px-4">
         <div className="max-w-3xl mx-auto">
+          <Reveal animation="zoom">
           <div className="text-5xl mb-4">🇩🇪</div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Sprechen Sie Deutsch ?</h2>
           <p className="text-red-100 text-lg mb-2">Pas encore ? C&apos;est le moment de commencer !</p>
@@ -582,6 +600,7 @@ export default async function HomePage() {
             <Link href="/niveaux" className="btn-outline-white">Tester mon niveau</Link>
             <Link href="/contact" className="btn-outline-white">Nous contacter</Link>
           </div>
+          </Reveal>
         </div>
       </section>
     </>

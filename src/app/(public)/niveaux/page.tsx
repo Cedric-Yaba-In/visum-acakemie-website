@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import Reveal from '@/components/Reveal'
 
 export const metadata: Metadata = { title: 'Niveaux de formation' }
 
@@ -32,7 +33,7 @@ export default function NiveauxPage() {
 
         <div className="grid md:grid-cols-5 gap-4 mb-16">
           {niveaux.map((n, i) => (
-            <div key={n.code} className="text-center">
+            <Reveal key={n.code} animation="zoom" delay={i * 80} className="text-center">
               <div className={`${n.couleur} text-white rounded-full w-16 h-16 flex items-center justify-center text-xl font-bold mx-auto mb-3`}>
                 {n.code}
               </div>
@@ -41,12 +42,13 @@ export default function NiveauxPage() {
               <div className="text-xs text-gray-400">⏱ {n.duree}</div>
               <div className="text-xs text-[#E8001C] mt-1">{n.objectif}</div>
               {i < niveaux.length - 1 && <div className="hidden md:block text-gray-300 text-2xl mt-2">→</div>}
-            </div>
+            </Reveal>
           ))}
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div>
+          <Reveal animation="fade-right">
+            <div>
             <h2 className="text-2xl font-bold text-[#1A1A2E] mb-6">Guide d&apos;orientation</h2>
             <p className="text-gray-500 mb-6">Répondez à ces questions pour identifier votre niveau :</p>
             <div className="space-y-4">
@@ -60,14 +62,16 @@ export default function NiveauxPage() {
                 </div>
               ))}
             </div>
-          </div>
-
+            </div>
+          </Reveal>
+          <Reveal animation="fade-left" delay={150}>
           <div className="bg-[#1A1A2E] text-white rounded-2xl p-8">
             <h2 className="text-2xl font-bold mb-4">Besoin de conseil ?</h2>
             <p className="text-gray-300 mb-6">Nos conseillers pédagogiques peuvent vous aider à identifier le niveau le plus adapté à votre profil lors d&apos;un entretien gratuit.</p>
             <Link href="/contact" className="btn-primary block text-center mb-4">Prendre rendez-vous</Link>
             <Link href="/formations" className="btn-outline-white block text-center">Voir toutes les formations</Link>
           </div>
+          </Reveal>
         </div>
       </section>
     </>

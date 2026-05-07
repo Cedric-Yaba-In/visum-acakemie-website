@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { useState } from 'react'
 import { MapPin, Phone, Mail, Clock, CheckCircle, Loader2 } from 'lucide-react'
 import Link from 'next/link'
+import Reveal from '@/components/Reveal'
 
 const schema = z.object({
   nom: z.string().min(2, 'Nom requis'),
@@ -48,6 +49,7 @@ export default function ContactPage() {
       </section>
 
       <section className="py-16 max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">
+        <Reveal animation="fade-right">
         <div>
           <h2 className="text-2xl font-bold text-[#1A1A2E] mb-6">Envoyez-nous un message</h2>
           {success ? (
@@ -94,7 +96,9 @@ export default function ContactPage() {
             </form>
           )}
         </div>
+        </Reveal>
 
+        <Reveal animation="fade-left" delay={150}>
         <div className="space-y-8">
           <div>
             <h2 className="text-2xl font-bold text-[#1A1A2E] mb-6">Nos coordonnées</h2>
@@ -126,6 +130,7 @@ export default function ContactPage() {
             />
           </div>
         </div>
+        </Reveal>
       </section>
     </>
   )

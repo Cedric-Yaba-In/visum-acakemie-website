@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import FloatingButtons from '@/components/FloatingButtons'
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -7,6 +8,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <Navbar />
       <main>{children}</main>
       <Footer />
+      <FloatingButtons />
     </>
   )
 }
