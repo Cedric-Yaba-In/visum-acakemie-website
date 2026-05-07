@@ -6,8 +6,10 @@ import { Menu, X } from 'lucide-react'
 
 const links = [
   { href: '/', label: 'Accueil' },
+  { href: '/formations-professionnelles', label: 'Ausbildung 🇩🇪' },
   { href: '/formations', label: 'Formations' },
   { href: '/niveaux', label: 'Niveaux' },
+  { href: '/galerie', label: 'Galerie' },
   { href: '/annonces', label: 'Annonces' },
   { href: '/contact', label: 'Contact' },
 ]

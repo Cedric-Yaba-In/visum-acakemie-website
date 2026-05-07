@@ -16,7 +16,7 @@ const niveaux = [
   { code: 'B1', label: 'Intermédiaire', desc: 'Autonomie à l\'oral et à l\'écrit' },
   { code: 'B2', label: 'Avancé', desc: 'Aisance professionnelle' },
   { code: 'C1', label: 'Confirmé', desc: 'Maîtrise approfondie' },
-  { code: 'C2', label: 'Expert', desc: 'Niveau bilingue certifié' },
+  // { code: 'C2', label: 'Expert', desc: 'Niveau bilingue certifié' },
 ]
 
 const competences = [
@@ -72,7 +72,7 @@ export default async function HomePage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/formations" className="btn-primary">Voir les cours</Link>
-              <Link href="/niveaux" className="btn-outline-white">Tester mon niveau</Link>
+              <Link href="/formations-professionnelles" className="btn-outline-white">Formations en Allemagne 🇩🇪</Link>
             </div>
             {/* <div className="flex items-center gap-6 mt-8 pt-8 border-t border-white/10 text-sm text-gray-400">
               <span>🏆 Partenaire Goethe-Institut</span>

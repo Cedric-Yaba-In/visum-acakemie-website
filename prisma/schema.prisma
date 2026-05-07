@@ -70,6 +70,19 @@ model Inscription {
   createdAt  DateTime @default(now())
 }
 
+model Media {
+  id          String        @id @default(cuid())
+  titre       String
+  description String?
+  url         String
+  type        MediaType
+  categorie   CategorieMedia
+  publie      Boolean       @default(true)
+  ordre       Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
 enum Niveau {
   DEBUTANT
   ELEMENTAIRE
@@ -88,5 +101,19 @@ enum CategorieAnnonce {
   EVENEMENT
   OFFRE
   RESULTAT
+  AUTRE
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+}
+
+enum CategorieMedia {
+  COURS
+  EVENEMENT
+  EXAMENS
+  VIE_CAMPUS
+  ALLEMAGNE
   AUTRE
 }
