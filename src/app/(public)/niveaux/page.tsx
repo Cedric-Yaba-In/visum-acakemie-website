@@ -8,7 +8,7 @@ const niveaux = [
   { code: 'A2', label: 'Élémentaire', couleur: 'bg-teal-500', description: 'Vous avez quelques notions de base et souhaitez les consolider.', duree: '3-4 mois', objectif: 'Maîtriser les éléments essentiels' },
   { code: 'B1', label: 'Intermédiaire', couleur: 'bg-blue-500', description: 'Vous avez une base solide et pouvez aborder des sujets plus complexes.', duree: '4-5 mois', objectif: 'Développer une autonomie réelle' },
   { code: 'B2', label: 'Avancé', couleur: 'bg-orange-500', description: 'Vous maîtrisez bien la discipline et visez l\'excellence.', duree: '5-6 mois', objectif: 'Atteindre un niveau professionnel' },
-  { code: 'C1/C2', label: 'Expert', couleur: 'bg-red-600', description: 'Vous êtes expert et souhaitez obtenir une certification de haut niveau.', duree: '6+ mois', objectif: 'Certification et expertise reconnue' },
+  { code: 'C1', label: 'Expert', couleur: 'bg-red-600', description: 'Vous êtes expert et souhaitez obtenir une certification de haut niveau.', duree: '6+ mois', objectif: 'Certification et expertise reconnue' },
 ]
 
 const questions = [
@@ -63,7 +63,7 @@ export default function NiveauxPage() {
           </div>
 
           <div className="bg-[#1A1A2E] text-white rounded-2xl p-8">
-            <h2 className="text-2xl font-bold mb-4">Toujours pas sûr ?</h2>
+            <h2 className="text-2xl font-bold mb-4">Besoin de conseil ?</h2>
             <p className="text-gray-300 mb-6">Nos conseillers pédagogiques peuvent vous aider à identifier le niveau le plus adapté à votre profil lors d&apos;un entretien gratuit.</p>
             <Link href="/contact" className="btn-primary block text-center mb-4">Prendre rendez-vous</Link>
             <Link href="/formations" className="btn-outline-white block text-center">Voir toutes les formations</Link>

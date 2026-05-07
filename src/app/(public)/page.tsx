@@ -30,9 +30,12 @@ const raisons = [
   'Formateurs certifiés',
   'Méthode communicative et immersive',
   'Petits groupes (max. 12 apprenants)',
-  'Préparation aux certifications officielles (Goethe, TELC, ÖSD)',
+  'Préparation aux certifications officielles (Goethe, TELC, ÖSD, ECL)',
   'Cours en présentiel et en ligne',
   'Matériel pédagogique inclus',
+  'Cadre d\'apprentissage convivial et motivant',
+  'Internet illimité',
+  'Cours de répétition gratuit'
 ]
 
 const temoignages = [
@@ -65,14 +68,14 @@ export default async function HomePage() {
               🇩🇪 Centre de langue allemande certifié
             </span> */}
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-              Apprenez l&apos;allemand avec <span className="text-[#5ECFCF]">Visum Akademie</span>
+              Apprenez l&apos;allemand avec <span className="text-[#5ECFCF]">Visum+Akademie</span>
             </h1>
             <p className="text-gray-300 text-lg mb-8 leading-relaxed">
               Du niveau A1 au C2, nos formateurs natifs vous accompagnent vers la maîtrise de la langue allemande. Préparez vos certifications Goethe, TELC et ÖSD avec confiance.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/formations" className="btn-primary">Voir les cours</Link>
-              <Link href="/formations-professionnelles" className="btn-outline-white">Formations en Allemagne 🇩🇪</Link>
+              <Link href="/formations" className="btn-primary">Offre de formations</Link>
+              <Link href="/formations-professionnelles" className="btn-outline-white">Formations en Allemagne</Link>
             </div>
             {/* <div className="flex items-center gap-6 mt-8 pt-8 border-t border-white/10 text-sm text-gray-400">
               <span>🏆 Partenaire Goethe-Institut</span>
@@ -88,7 +91,7 @@ export default async function HomePage() {
 
       {/* ── STATS ── */}
       <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-5 grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map(({ icon: Icon, value, label }) => (
             <div key={label} className="text-center">
               <div className="inline-flex items-center justify-center w-14 h-14 bg-[#E8001C]/10 rounded-full mb-3">
@@ -105,7 +108,7 @@ export default async function HomePage() {
       <section className="py-20 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="section-title">Tous les niveaux du CECR</h2>
+            <h2 className="section-title">Tous les niveaux d'apprentissage</h2>
             <p className="section-subtitle">
               Du grand débutant au bilingue, Visum Akademie propose un parcours complet conforme au Cadre Européen Commun de Référence pour les langues.
             </p>
@@ -156,21 +159,21 @@ export default async function HomePage() {
               <div className="w-32 h-32 rounded-full bg-gradient-to-br from-[#E8001C] to-[#5ECFCF] flex items-center justify-center mb-4">
                 <GraduationCap size={52} className="text-white" />
               </div>
-              <div className="font-bold text-lg text-white"> Boris Kouamen</div>
-              <div className="text-[#5ECFCF] text-sm mt-1">Fondateur & Directeur Pédagogique</div>
+              <div className="font-bold text-lg text-white"> Boris Kouamen Nwandji</div>
+              <div className="text-[#5ECFCF] text-sm mt-1">Co-Fondateur & CEO</div>
               {/* <div className="text-gray-400 text-xs mt-1">Docteur en Linguistique Germanique</div> */}
             </div>
             <div className="md:col-span-2">
               <Quote size={40} className="text-[#E8001C] mb-4 opacity-60" />
               <p className="text-gray-300 text-lg leading-relaxed mb-4 italic">
-                &ldquo;Chez Visum Akademie, nous croyons que l&apos;apprentissage de l&apos;allemand est bien plus qu&apos;une compétence linguistique — c&apos;est une ouverture sur une culture riche, une économie dynamique et des opportunités professionnelles exceptionnelles.
+                &ldquo;Chez Visum+ Akademie, nous croyons que l&apos;apprentissage de l&apos;allemand est bien plus qu&apos;une compétence linguistique — c&apos;est une ouverture sur une culture riche, une économie dynamique et des opportunités professionnelles exceptionnelles.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed mb-6 italic">
                 Notre mission est de vous offrir un enseignement rigoureux, vivant et adapté à vos objectifs, qu&apos;il s&apos;agisse de voyager, de travailler ou de vous certifier. Chaque apprenant est unique, et nous nous engageons à l&apos;accompagner jusqu&apos;à la réussite.&rdquo;
               </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-0.5 bg-[#E8001C]" />
-                <span className="text-[#5ECFCF] font-semibold text-sm">Willkommen bei Visum Akademie !</span>
+                <span className="text-[#5ECFCF] font-semibold text-sm">Willkommen bei Visum+ Akademie !</span>
               </div>
             </div>
           </div>
@@ -181,7 +184,7 @@ export default async function HomePage() {
       <section className="py-20 bg-[#F5F5F5]">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="section-title">Pourquoi choisir Visum Akademie ?</h2>
+            <h2 className="section-title">Pourquoi choisir Visum+ Akademie ?</h2>
             <p className="text-gray-500 mb-8">
               Nous ne nous contentons pas d&apos;enseigner l&apos;allemand — nous vous préparons à l&apos;utiliser dans la vraie vie, avec confiance et efficacité.
             </p>
@@ -193,8 +196,8 @@ export default async function HomePage() {
                 </li>
               ))}
             </ul>
-            <Link href="/formations" className="btn-primary inline-flex items-center gap-2 mt-8">
-              Découvrir nos cours <ArrowRight size={16} />
+            <Link href="/galerie" className="btn-primary inline-flex items-center gap-2 mt-8">
+              Découvrir notre centre <ArrowRight size={16} />
             </Link>
           </div>
           <div className="bg-[#1A1A2E] rounded-2xl p-8 text-white">
@@ -204,7 +207,7 @@ export default async function HomePage() {
                 { cert: 'Goethe-Zertifikat', niveaux: 'A1 → C2', desc: 'La certification allemande la plus reconnue mondialement' },
                 { cert: 'TELC Deutsch', niveaux: 'A1 → C1', desc: 'Certification européenne des langues, reconnue par les employeurs' },
                 { cert: 'ÖSD', niveaux: 'A2 → C2', desc: 'Diplôme autrichien de langue allemande' },
-                { cert: 'TestDaF', niveaux: 'B2 → C1', desc: 'Requis pour les études universitaires en Allemagne' },
+                { cert: 'ECL', niveaux: 'B2 → C1', desc: 'Requis pour les études universitaires en Allemagne' },
               ].map(c => (
                 <div key={c.cert} className="border border-white/10 rounded-xl p-4">
                   <div className="flex items-center justify-between mb-1">
