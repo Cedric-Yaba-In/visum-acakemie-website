@@ -12,6 +12,7 @@ const links = [
   { href: '/galerie', label: 'Galerie' },
   { href: '/annonces', label: 'Annonces' },
   { href: '/contact', label: 'Contact' },
+  { href: '/recruteurs', label: 'Recruteurs 🇩🇪' },
 ]
 
 export default function Navbar() {

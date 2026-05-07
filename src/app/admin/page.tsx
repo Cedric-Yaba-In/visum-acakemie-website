@@ -1,13 +1,14 @@
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
-import { Bell, BookOpen, MessageSquare, Users, Plus, ArrowRight } from 'lucide-react'
+import { Bell, BookOpen, MessageSquare, Users, Plus, ArrowRight, Building2 } from 'lucide-react'
 
 export default async function AdminDashboardPage() {
-  const [annonces, formations, messages, inscriptions] = await Promise.all([
+  const [annonces, formations, messages, inscriptions, recruteurs] = await Promise.all([
     prisma.annonce.count(),
     prisma.formation.count(),
     prisma.message.count({ where: { lu: false } }),
     prisma.inscription.count({ where: { traite: false } }),
+    prisma.recruteur.count({ where: { lu: false } }),
   ])
 
   const dernieresAnnonces = await prisma.annonce.findMany({ take: 5, orderBy: { createdAt: 'desc' } })
@@ -18,6 +19,7 @@ export default async function AdminDashboardPage() {
     { icon: BookOpen, label: 'Formations', value: formations, href: '/admin/formations', color: 'bg-green-500' },
     { icon: MessageSquare, label: 'Messages non lus', value: messages, href: '/admin/messages', color: 'bg-orange-500' },
     { icon: Users, label: 'Inscriptions en attente', value: inscriptions, href: '/admin/inscriptions?statut=en-attente', color: 'bg-[#E8001C]' },
+    { icon: Building2, label: 'Recruteurs non lus', value: recruteurs, href: '/admin/recruteurs', color: 'bg-purple-500' },
   ]
 
   return (
@@ -32,7 +34,7 @@ export default async function AdminDashboardPage() {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+      <div className="grid grid-cols-2 lg:grid-cols-5 gap-6 mb-10">
         {stats.map(({ icon: Icon, label, value, href, color }) => (
           <Link href={href} key={label} className="bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
             <div className={`${color} w-12 h-12 rounded-xl flex items-center justify-center mb-4`}>

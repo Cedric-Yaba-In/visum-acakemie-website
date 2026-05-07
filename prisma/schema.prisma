@@ -104,6 +104,17 @@ enum CategorieAnnonce {
   AUTRE
 }
 
+model Recruteur {
+  id          String   @id @default(cuid())
+  nom         String
+  entreprise  String
+  role        String
+  email       String
+  message     String
+  lu          Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
 enum MediaType {
   PHOTO
   VIDEO
